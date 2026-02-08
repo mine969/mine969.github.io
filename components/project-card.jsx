@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Github } from "lucide-react"
 
-export function ProjectCard({ title, description, tags, github, index }) {
+export function ProjectCard({ title, description, tags, github, demo, index }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -31,6 +31,14 @@ export function ProjectCard({ title, description, tags, github, index }) {
           </div>
         </CardContent>
         <CardFooter className="gap-2 pt-4 border-t border-border/50">
+          {demo && (
+            <Button variant="secondary" size="sm" className="w-full" asChild>
+              <a href={demo} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="w-4 h-4 mr-2" />
+                Live Demo
+              </a>
+            </Button>
+          )}
 
           {github && (
             <Button variant="outline" size="sm" className="w-full" asChild>

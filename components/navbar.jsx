@@ -26,7 +26,7 @@ export function Navbar() {
     { name: "Home", href: "#home", icon: Home },
     { name: "About", href: "#about", icon: User },
     { name: "Experience", href: "#experience", icon: Briefcase },
-    { name: "Skills", href: "#skills", icon: Code },
+    { name: "Projects", href: "#projects", icon: Code },
     { name: "Contact", href: "#contact", icon: Mail },
   ]
 
@@ -56,7 +56,9 @@ export function Navbar() {
               className="relative px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-full hover:bg-accent/50 group"
             >
               <span className="hidden sm:inline">{item.name}</span>
-              <span className="sm:hidden"><item.icon className="w-4 h-4" /></span>
+              <span className="sm:hidden">
+                <item.icon className="w-4 h-4" aria-hidden="true" />
+              </span>
               <span className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             </a>
           ))}

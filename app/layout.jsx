@@ -8,8 +8,27 @@ import { ThemeProvider } from "@/components/theme-provider"
 export const metadata = {
   title: "Hein Htet Zaw - Digital Innovation Developer",
   description:
-    "Final-year Digital Innovative Technology student with expertise in Python, cybersecurity, and project management",
-  generator: "v0.app",
+    "Final-year Digital Innovative Technology student with expertise in Python, cybersecurity, DevOps, and project management.",
+  keywords: [
+    "Hein Htet Zaw",
+    "Digital Innovation",
+    "Cybersecurity",
+    "DevOps",
+    "Web Developer",
+    "Portfolio",
+  ],
+  openGraph: {
+    title: "Hein Htet Zaw - Digital Innovation Developer",
+    description:
+      "Secure, scalable web experiences with a focus on cybersecurity, DevOps, and modern UI.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hein Htet Zaw - Digital Innovation Developer",
+    description:
+      "Secure, scalable web experiences with a focus on cybersecurity, DevOps, and modern UI.",
+  },
 }
 
 export default function RootLayout({
