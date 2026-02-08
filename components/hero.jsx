@@ -102,24 +102,42 @@ export function Hero() {
           </p>
 
           <div className="flex flex-wrap gap-4 pt-4">
-            <Button size="lg" className="rounded-full group">
-              View Projects
-              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <Button size="lg" className="rounded-full group" asChild>
+              <a href="#projects">
+                View Projects
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
             </Button>
-            <Button size="lg" variant="outline" className="rounded-full">
-              Contact Me
+            <Button size="lg" variant="outline" className="rounded-full" asChild>
+              <a href="#contact">Contact Me</a>
             </Button>
           </div>
 
           <div className="flex gap-4 pt-8 text-muted-foreground">
-            <a href="https://github.com/mine969" className="hover:text-primary transition-colors">
-                <Github className="w-6 h-6" />
+            <a
+              href="https://github.com/mine969"
+              className="hover:text-primary transition-colors"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Visit GitHub profile"
+            >
+                <Github className="w-6 h-6" aria-hidden="true" />
             </a>
-            <a href="https://www.linkedin.com/in/mine969/" className="hover:text-primary transition-colors">
-                <Linkedin className="w-6 h-6" />
+            <a
+              href="https://www.linkedin.com/in/mine969/"
+              className="hover:text-primary transition-colors"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Visit LinkedIn profile"
+            >
+                <Linkedin className="w-6 h-6" aria-hidden="true" />
             </a>
-            <a href="mailto:minehhz69@gmail.com" className="hover:text-primary transition-colors">
-                <Mail className="w-6 h-6" />
+            <a
+              href="mailto:minehhz69@gmail.com"
+              className="hover:text-primary transition-colors"
+              aria-label="Send an email"
+            >
+                <Mail className="w-6 h-6" aria-hidden="true" />
             </a>
           </div>
         </motion.div>
