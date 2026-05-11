@@ -1,16 +1,18 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { motion, useScroll, useMotionValueEvent } from "framer-motion"
+import { LocaleSwitcher } from "@/components/locale-switcher"
+import { useLocale } from "@/components/locale-provider"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
-import { Button } from "@/components/ui/button"
 import { Home, User, Briefcase, Code, Mail } from "lucide-react"
 
 export function Navbar() {
   const { scrollY } = useScroll()
   const [hidden, setHidden] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { copy } = useLocale()
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious()
@@ -23,15 +25,16 @@ export function Navbar() {
   })
 
   const navItems = [
-    { name: "Home", href: "#home", icon: Home },
-    { name: "About", href: "#about", icon: User },
-    { name: "Experience", href: "#experience", icon: Briefcase },
-    { name: "Projects", href: "#projects", icon: Code },
-    { name: "Contact", href: "#contact", icon: Mail },
+    { name: copy.nav.home, href: "#home", icon: Home },
+    { name: copy.nav.about, href: "#about", icon: User },
+    { name: copy.nav.experience, href: "#experience", icon: Briefcase },
+    { name: copy.nav.projects, href: "#projects", icon: Code },
+    { name: copy.nav.contact, href: "#contact", icon: Mail },
   ]
 
   return (
     <motion.nav
+      aria-label="Primary"
       variants={{
         visible: { y: 0 },
         hidden: { y: "-100%" },
@@ -64,6 +67,7 @@ export function Navbar() {
           ))}
         </div>
         <div className="h-6 w-px bg-border/50 mx-1" />
+        <LocaleSwitcher />
         <ThemeToggle />
       </div>
     </motion.nav>

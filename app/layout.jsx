@@ -3,31 +3,55 @@ import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import "./globals.css"
+import { LocaleProvider } from "@/components/locale-provider"
 import { ThemeProvider } from "@/components/theme-provider"
+import { profile, siteUrl } from "@/lib/portfolio-data"
 
 export const metadata = {
-  title: "Hein Htet Zaw - Digital Innovation Developer",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${profile.name} | ${profile.title}`,
+    template: `%s | ${profile.name}`,
+  },
   description:
-    "Final-year Digital Innovative Technology student with expertise in Python, cybersecurity, DevOps, and project management.",
+    "Security-minded portfolio for Hein Htet Zaw featuring frontend delivery, DevOps workflow thinking, cybersecurity focus, and technical writing.",
   keywords: [
     "Hein Htet Zaw",
-    "Digital Innovation",
     "Cybersecurity",
     "DevOps",
-    "Web Developer",
+    "Frontend Engineer",
+    "GitHub Pages",
+    "Technical Portfolio",
     "Portfolio",
   ],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Hein Htet Zaw - Digital Innovation Developer",
+    title: `${profile.name} | ${profile.title}`,
     description:
-      "Secure, scalable web experiences with a focus on cybersecurity, DevOps, and modern UI.",
+      "Portfolio featuring secure delivery thinking, frontend implementation, DevOps-minded workflow improvements, and technical notes.",
+    url: siteUrl,
+    siteName: `${profile.name} Portfolio`,
     type: "website",
+    images: [
+      {
+        url: profile.socialImage,
+        width: 1200,
+        height: 1200,
+        alt: profile.name,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hein Htet Zaw - Digital Innovation Developer",
+    title: `${profile.name} | ${profile.title}`,
     description:
-      "Secure, scalable web experiences with a focus on cybersecurity, DevOps, and modern UI.",
+      "Security-minded portfolio featuring frontend delivery, DevOps workflow thinking, and technical notes.",
+    images: [profile.socialImage],
+  },
+  icons: {
+    icon: "/icon.svg",
   },
 }
 
@@ -37,15 +61,20 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Suspense fallback={null}>{children}</Suspense>
-          <Analytics />
-        </ThemeProvider>
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
+        <LocaleProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Suspense fallback={null}>{children}</Suspense>
+            <Analytics />
+          </ThemeProvider>
+        </LocaleProvider>
       </body>
     </html>
   )

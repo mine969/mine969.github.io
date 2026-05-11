@@ -33,6 +33,14 @@ jobs:
       - name: Build static site
         run: npm run build
 
+      - name: Verify exported Pages output
+        run: |
+          test -f out/index.html
+          if grep -R -E '"/Mine-Porfolio-Website(/|_)|/Mine-Porfolio-Website/_next|/Mine-Porfolio-Website/images' out; then
+            echo "Found hardcoded GitHub Pages asset path in exported site"
+            exit 1
+          fi
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
