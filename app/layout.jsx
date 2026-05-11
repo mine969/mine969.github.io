@@ -51,7 +51,7 @@ export const metadata = {
     images: [profile.socialImage],
   },
   icons: {
-    icon: "/icon.svg",
+    icon: profile.socialImage,
   },
 }
 
