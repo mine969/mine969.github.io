@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowRight, FileText, Mail } from "lucide-react"
+import { ArrowRight, ExternalLink, FileText, Mail } from "lucide-react"
 import { Navbar } from "@/components/navbar"
 import { Hero } from "@/components/hero"
 import { BentoGrid } from "@/components/bento-grid"
@@ -169,13 +169,28 @@ export function HomePage() {
                 {copy.proof.title}
               </h2>
               <p className="mt-3 text-muted-foreground">{copy.proof.intro}</p>
+              <a
+                href={profile.links.documents}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-5 inline-flex items-center gap-2 rounded-full border border-border/60 px-4 py-2 text-sm font-medium transition-colors hover:border-primary/60 hover:text-primary"
+              >
+                {copy.proof.documents}
+                <ExternalLink className="h-4 w-4" />
+              </a>
               <div className="mt-6 space-y-3">
                 {localizedCertifications.map((item) => (
-                  <div key={item.name} className="rounded-2xl border border-border/50 bg-background/70 p-4">
+                  <a
+                    key={item.name}
+                    href={profile.links.documents}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block rounded-2xl border border-border/50 bg-background/70 p-4 transition-colors hover:border-primary/50"
+                  >
                     <p className="font-medium">{item.name}</p>
                     <p className="mt-1 text-sm text-muted-foreground">{item.issuer}</p>
                     <p className="mt-2 text-xs uppercase tracking-[0.2em] text-primary">{item.status}</p>
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>
@@ -282,6 +297,15 @@ export function HomePage() {
                     <FileText className="mr-2 h-4 w-4" />
                     {copy.contact.resume}
                   </Link>
+                  <a
+                    href={profile.links.documents}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center rounded-full border border-border/60 px-8 py-3 text-sm font-medium transition-colors hover:border-primary/60 hover:text-primary"
+                  >
+                    <ExternalLink className="mr-2 h-4 w-4" />
+                    {copy.contact.documents}
+                  </a>
                 </div>
               </div>
 
@@ -312,6 +336,9 @@ export function HomePage() {
                       </a>
                       <a className="hover:text-primary" href={profile.links.github} target="_blank" rel="noreferrer">
                         GitHub
+                      </a>
+                      <a className="hover:text-primary" href={profile.links.documents} target="_blank" rel="noreferrer">
+                        Docs
                       </a>
                     </dd>
                   </div>

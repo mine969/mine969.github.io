@@ -49,6 +49,9 @@ export function ResumePageContent() {
             <a className="block hover:text-primary" href={siteUrl} target="_blank" rel="noreferrer">
               Portfolio <ExternalLink className="ml-1 inline h-3.5 w-3.5" />
             </a>
+            <a className="block hover:text-primary" href={profile.links.documents} target="_blank" rel="noreferrer">
+              Documents <ExternalLink className="ml-1 inline h-3.5 w-3.5" />
+            </a>
           </div>
         </div>
       </section>
@@ -134,6 +137,15 @@ export function ResumePageContent() {
           >
             <Mail className="mr-2 h-4 w-4" />
             {copy.resume.contact}
+          </a>
+          <a
+            href={profile.links.documents}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center rounded-full border border-border/60 px-6 py-3 text-sm font-medium transition-colors hover:border-primary/60 hover:text-primary"
+          >
+            <ExternalLink className="mr-2 h-4 w-4" />
+            {copy.resume.documents}
           </a>
         </div>
       </section>
