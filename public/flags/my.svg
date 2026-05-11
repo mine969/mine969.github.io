@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>Myanmar flag</title>
+  <clipPath id="a"><rect width="64" height="64" rx="32"/></clipPath>
+  <g clip-path="url(#a)">
+    <rect width="64" height="21.33" y="0" fill="#FECB00"/>
+    <rect width="64" height="21.34" y="21.33" fill="#34B233"/>
+    <rect width="64" height="21.33" y="42.67" fill="#EA2839"/>
+    <path d="m32 14 4.23 13.03h13.7L38.85 35.1l4.23 13.03L32 40.07l-11.08 8.06 4.23-13.03-11.08-8.07h13.7L32 14Z" fill="#fff"/>
+  </g>
+</svg>

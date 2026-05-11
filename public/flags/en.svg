@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>English flag</title>
+  <rect width="64" height="64" rx="32" fill="#012169"/>
+  <path d="M0 8.5 8.5 0 64 55.5 55.5 64 0 8.5Z" fill="#fff"/>
+  <path d="M55.5 0 64 8.5 8.5 64 0 55.5 55.5 0Z" fill="#fff"/>
+  <path d="M0 13.5 13.5 0 64 50.5 50.5 64 0 13.5Z" fill="#C8102E"/>
+  <path d="M50.5 0 64 13.5 13.5 64 0 50.5 50.5 0Z" fill="#C8102E"/>
+  <path d="M24 0h16v64H24Z" fill="#fff"/>
+  <path d="M0 24h64v16H0Z" fill="#fff"/>
+  <path d="M27.5 0h9v64h-9Z" fill="#C8102E"/>
+  <path d="M0 27.5h64v9H0Z" fill="#C8102E"/>
+</svg>
