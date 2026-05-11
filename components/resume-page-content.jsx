@@ -132,8 +132,17 @@ export function ResumePageContent() {
           </div>
 
           <a
-            href={`mailto:${profile.email}`}
+            href={profile.links.cv}
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            <ExternalLink className="mr-2 h-4 w-4" />
+            {copy.resume.cv}
+          </a>
+          <a
+            href={`mailto:${profile.email}`}
+            className="inline-flex items-center rounded-full border border-border/60 px-6 py-3 text-sm font-medium transition-colors hover:border-primary/60 hover:text-primary"
           >
             <Mail className="mr-2 h-4 w-4" />
             {copy.resume.contact}

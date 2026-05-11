@@ -82,11 +82,11 @@ export function HomePage() {
 
       <Navbar />
 
-      <main id="main-content" className="container mx-auto space-y-24 px-4 pb-24">
+      <main id="main-content" className="container mx-auto space-y-18 px-4 pb-20 sm:space-y-24 sm:pb-24">
         <Hero copy={copy.hero} />
 
         <section id="about" className="scroll-mt-24" aria-labelledby="about-title">
-          <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
+          <div className="mx-auto grid max-w-5xl gap-6 sm:gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
             <div className="space-y-6">
               <h2 id="about-title" className="text-3xl font-bold tracking-tight">
                 {copy.about.heading}
@@ -95,7 +95,7 @@ export function HomePage() {
               <p className="text-muted-foreground">{copy.about.body}</p>
             </div>
 
-            <div className="rounded-3xl border border-border/50 bg-card/40 p-6 shadow-sm">
+            <div className="rounded-3xl border border-border/50 bg-card/40 p-5 shadow-sm sm:p-6">
               <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                 {copy.about.roleFit}
               </h3>
@@ -111,11 +111,11 @@ export function HomePage() {
         </section>
 
         <section aria-label="Highlights" className="scroll-mt-24">
-          <div className="grid gap-6 text-center md:grid-cols-3">
+          <div className="grid gap-4 text-center sm:gap-6 md:grid-cols-3">
             {copy.highlights.map((item) => (
               <div
                 key={item.label}
-                className="rounded-2xl border border-border/50 bg-card/40 px-6 py-8 shadow-sm"
+                className="rounded-2xl border border-border/50 bg-card/40 px-5 py-6 shadow-sm sm:px-6 sm:py-8"
               >
                 <p className="text-2xl font-semibold">{item.value}</p>
                 <p className="mt-2 text-sm text-muted-foreground">{item.label}</p>
@@ -164,7 +164,7 @@ export function HomePage() {
 
         <section className="scroll-mt-24" aria-labelledby="proof-title">
           <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="rounded-3xl border border-border/50 bg-card/40 p-6">
+            <div className="rounded-3xl border border-border/50 bg-card/40 p-5 sm:p-6">
               <h2 id="proof-title" className="text-3xl font-bold tracking-tight">
                 {copy.proof.title}
               </h2>
@@ -195,12 +195,12 @@ export function HomePage() {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-border/50 bg-card/40 p-6">
+            <div className="rounded-3xl border border-border/50 bg-card/40 p-5 sm:p-6">
               <h2 className="text-3xl font-bold tracking-tight">{copy.proof.howHelpTitle}</h2>
               <p className="mt-3 text-muted-foreground">{copy.proof.howHelpIntro}</p>
-              <div className="mt-8 grid gap-6 md:grid-cols-3">
+              <div className="mt-6 grid gap-4 sm:mt-8 sm:gap-6 md:grid-cols-3">
                 {localizedServices.map((item) => (
-                  <div key={item.title} className="rounded-2xl border border-border/40 bg-background/60 p-6">
+                  <div key={item.title} className="rounded-2xl border border-border/40 bg-background/60 p-5 sm:p-6">
                     <h3 className="text-lg font-semibold">{item.title}</h3>
                     <p className="mt-2 text-sm text-muted-foreground">{item.details}</p>
                   </div>
@@ -212,7 +212,7 @@ export function HomePage() {
 
         <section className="scroll-mt-24" aria-labelledby="focus-title">
           <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
-            <div className="rounded-3xl border border-border/50 bg-card/40 p-6">
+            <div className="rounded-3xl border border-border/50 bg-card/40 p-5 sm:p-6">
               <h2 id="focus-title" className="text-3xl font-bold tracking-tight">
                 {copy.focus.title}
               </h2>
@@ -226,7 +226,7 @@ export function HomePage() {
               </ul>
             </div>
 
-            <div className="rounded-3xl border border-border/50 bg-card/40 p-6">
+            <div className="rounded-3xl border border-border/50 bg-card/40 p-5 sm:p-6">
               <h2 className="text-3xl font-bold tracking-tight">{copy.focus.timelineTitle}</h2>
               <div className="mt-6 space-y-4">
                 {localizedTimeline.map((item) => (
@@ -247,7 +247,7 @@ export function HomePage() {
         </section>
 
         <section className="scroll-mt-24" aria-labelledby="notes-title">
-          <div className="rounded-3xl border border-border/50 bg-card/40 p-6 md:p-8">
+          <div className="rounded-3xl border border-border/50 bg-card/40 p-5 sm:p-6 md:p-8">
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
                 <h2 id="notes-title" className="text-3xl font-bold tracking-tight">
@@ -264,9 +264,9 @@ export function HomePage() {
               </Link>
             </div>
 
-            <div className="mt-8 grid gap-6 md:grid-cols-3">
+            <div className="mt-6 grid gap-4 sm:mt-8 sm:gap-6 md:grid-cols-3">
               {localizedNotes.map((note) => (
-                <article key={note.title} className="rounded-2xl border border-border/50 bg-background/70 p-5">
+                <article key={note.title} className="rounded-2xl border border-border/50 bg-background/70 p-4 sm:p-5">
                   <p className="text-xs uppercase tracking-[0.2em] text-primary">{note.audience}</p>
                   <h3 className="mt-3 text-lg font-semibold">{note.title}</h3>
                   <p className="mt-3 text-sm text-muted-foreground">{note.summary}</p>
@@ -277,22 +277,31 @@ export function HomePage() {
         </section>
 
         <section id="contact" className="scroll-mt-24">
-          <div className="rounded-3xl border border-border/50 bg-accent/5 px-6 py-12">
+          <div className="rounded-3xl border border-border/50 bg-accent/5 px-4 py-8 sm:px-6 sm:py-12">
             <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
               <div>
                 <h2 className="text-3xl font-bold tracking-tight">{copy.contact.title}</h2>
                 <p className="mt-4 max-w-2xl text-muted-foreground">{copy.contact.intro}</p>
-                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
+                  <a
+                    href={profile.links.cv}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex w-full items-center justify-center rounded-full bg-primary px-8 py-4 text-base font-semibold text-primary-foreground transition-colors hover:bg-primary/90 sm:w-auto"
+                  >
+                    <FileText className="mr-2 h-5 w-5" />
+                    {copy.contact.cv}
+                  </a>
                   <a
                     href={`mailto:${profile.email}`}
-                    className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+                    className="inline-flex w-full items-center justify-center rounded-full border border-border/60 px-8 py-3 text-sm font-medium transition-colors hover:border-primary/60 hover:text-primary sm:w-auto"
                   >
                     <Mail className="mr-2 h-4 w-4" />
                     {copy.contact.email}
                   </a>
                   <Link
                     href="/resume"
-                    className="inline-flex items-center justify-center rounded-full border border-border/60 px-8 py-3 text-sm font-medium transition-colors hover:border-primary/60 hover:text-primary"
+                    className="inline-flex w-full items-center justify-center rounded-full border border-border/60 px-8 py-3 text-sm font-medium transition-colors hover:border-primary/60 hover:text-primary sm:w-auto"
                   >
                     <FileText className="mr-2 h-4 w-4" />
                     {copy.contact.resume}
@@ -301,7 +310,7 @@ export function HomePage() {
                     href={profile.links.documents}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-center rounded-full border border-border/60 px-8 py-3 text-sm font-medium transition-colors hover:border-primary/60 hover:text-primary"
+                    className="inline-flex w-full items-center justify-center rounded-full border border-border/60 px-8 py-3 text-sm font-medium transition-colors hover:border-primary/60 hover:text-primary sm:w-auto"
                   >
                     <ExternalLink className="mr-2 h-4 w-4" />
                     {copy.contact.documents}
@@ -309,7 +318,7 @@ export function HomePage() {
                 </div>
               </div>
 
-              <div className="rounded-3xl border border-border/50 bg-background/70 p-6">
+              <div className="rounded-3xl border border-border/50 bg-background/70 p-5 sm:p-6">
                 <h3 className="text-lg font-semibold">{copy.contact.quickDetails}</h3>
                 <dl className="mt-5 space-y-4 text-sm">
                   <div>
