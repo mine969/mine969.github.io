@@ -27,6 +27,7 @@ export function HomePage() {
     title: localized.projects[index]?.title ?? project.title,
     description: copy.projects[index]?.description ?? project.description,
     result: copy.projects[index]?.result ?? project.result,
+    demoText: copy.projects[index]?.demoText,
   }))
 
   const localizedServices = services.map((service, index) => ({

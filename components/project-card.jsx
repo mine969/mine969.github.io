@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Github } from "lucide-react"
 
-export function ProjectCard({ title, description, result, tags, github, demo, index, buttonLabels }) {
+export function ProjectCard({ title, description, result, tags, github, demo, demoText, index, buttonLabels }) {
   const reducedMotion = useReducedMotion()
 
   return (
@@ -38,7 +38,7 @@ export function ProjectCard({ title, description, result, tags, github, demo, in
             <Button variant="secondary" size="sm" className="w-full" asChild>
               <a href={demo} target="_blank" rel="noopener noreferrer" aria-label={`Open live demo for ${title}`}>
                 <ExternalLink className="w-4 h-4 mr-2" />
-                {buttonLabels.liveDemo}
+                {demoText ?? buttonLabels.liveDemo}
               </a>
             </Button>
           )}
