@@ -236,6 +236,18 @@ export function BetaHomePage({ isBeta = false }) {
               </div>
             </div>
 
+            <div className="beta-card mt-4 p-5">
+              <p className="beta-accent-label text-sm uppercase tracking-[0.18em]">{copy.experienceSection.languagesTitle}</p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                {localized.languagesList.map((item) => (
+                  <div key={item.name} className="flex items-center justify-between rounded-xl border px-4 py-3 text-sm" style={{ borderColor: "color-mix(in oklab, var(--color-border) 30%, transparent)" }}>
+                    <span className="font-medium">{item.name}</span>
+                    <span className="text-muted-foreground">{item.level}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <div className="mt-8 grid gap-4 lg:grid-cols-2">
               {localizedTimeline.map((item) => (
                 <article key={`${item.title}-${item.period}`} className="beta-card p-5">
