@@ -354,11 +354,27 @@ export function BetaHomePage() {
                 <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{copy.contact.timezone}</p>
                 <p className="mt-2 text-sm font-medium">{profile.timezone}</p>
               </div>
-              <div className="rounded-2xl border border-border/50 bg-background/70 p-4">
+              <div className="rounded-2xl border border-primary/20 bg-primary/[0.06] p-4 sm:col-span-2 lg:col-span-1">
                 <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{copy.contact.profiles}</p>
-                <div className="mt-2 flex gap-4 text-sm font-medium">
-                  <a href={profile.links.linkedin} target="_blank" rel="noreferrer" className="hover:text-primary">LinkedIn</a>
-                  <a href={profile.links.github} target="_blank" rel="noreferrer" className="hover:text-primary">GitHub</a>
+                <div className="mt-3 grid gap-3">
+                  <a
+                    href={profile.links.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-between rounded-xl border border-border/50 bg-background px-4 py-3 text-sm font-semibold transition-colors hover:border-primary/60 hover:text-primary"
+                  >
+                    <span>LinkedIn</span>
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                  <a
+                    href={profile.links.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-between rounded-xl border border-border/50 bg-background px-4 py-3 text-sm font-semibold transition-colors hover:border-primary/60 hover:text-primary"
+                  >
+                    <span>GitHub</span>
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
                 </div>
               </div>
             </div>

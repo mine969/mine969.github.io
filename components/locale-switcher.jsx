@@ -12,7 +12,6 @@ const localeMeta = {
 
 export function LocaleSwitcher() {
   const { locale, setLocale, locales } = useLocale()
-  const activeLocale = localeMeta[locale] ?? { label: locale.toUpperCase() }
 
   return (
     <label className="relative">
@@ -33,9 +32,6 @@ export function LocaleSwitcher() {
           )
         })}
       </select>
-      <span className="pointer-events-none absolute inset-y-0 left-3 inline-flex items-center text-xs font-medium text-foreground">
-        {activeLocale.label}
-      </span>
       <span className="pointer-events-none absolute inset-y-0 right-2 inline-flex items-center text-muted-foreground sm:right-3">
         <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
       </span>
