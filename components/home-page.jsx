@@ -10,6 +10,7 @@ import { useLocale } from "@/components/locale-provider"
 import { localizedCollections } from "@/lib/portfolio-localized-data"
 import {
   certifications,
+  getCvLink,
   notes,
   profile,
   projects,
@@ -284,7 +285,7 @@ export function HomePage() {
                 <p className="mt-4 max-w-2xl text-muted-foreground">{copy.contact.intro}</p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
                   <a
-                    href={profile.links.cv}
+                    href={getCvLink(locale)}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex w-full items-center justify-center rounded-full bg-primary px-8 py-4 text-base font-semibold text-primary-foreground transition-colors hover:bg-primary/90 sm:w-auto"

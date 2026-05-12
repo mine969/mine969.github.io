@@ -5,6 +5,21 @@ import { defaultLocale, locales, portfolioCopy } from "@/lib/portfolio-copy"
 
 const LocaleContext = createContext(null)
 
+function detectInitialLocale() {
+  const browserLanguages = navigator.languages ?? [navigator.language]
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+
+  if (browserLanguages.some((item) => item?.toLowerCase().startsWith("ja")) || timeZone === "Asia/Tokyo") {
+    return "ja"
+  }
+
+  if (browserLanguages.some((item) => item?.toLowerCase().startsWith("th")) || timeZone === "Asia/Bangkok") {
+    return "th"
+  }
+
+  return defaultLocale
+}
+
 export function LocaleProvider({ children }) {
   const [locale, setLocale] = useState(defaultLocale)
 
@@ -16,7 +31,9 @@ export function LocaleProvider({ children }) {
       return
     }
 
-    document.documentElement.lang = defaultLocale
+    const detectedLocale = detectInitialLocale()
+    setLocale(detectedLocale)
+    document.documentElement.lang = detectedLocale === "ja" ? "ja" : detectedLocale
   }, [])
 
   useEffect(() => {

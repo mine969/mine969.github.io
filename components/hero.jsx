@@ -4,7 +4,8 @@ import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } fro
 import Image from "next/image"
 import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { profile } from "@/lib/portfolio-data"
+import { getCvLink, profile } from "@/lib/portfolio-data"
+import { useLocale } from "@/components/locale-provider"
 
 function Card3D({ reducedMotion }) {
   const x = useMotionValue(0)
@@ -66,6 +67,7 @@ function Card3D({ reducedMotion }) {
 
 export function Hero({ copy }) {
   const reducedMotion = useReducedMotion()
+  const { locale } = useLocale()
 
   return (
     <section id="home" className="relative flex min-h-screen items-center justify-center overflow-hidden pt-20 pb-8 sm:pt-24 sm:pb-10">
@@ -117,7 +119,7 @@ export function Hero({ copy }) {
 
           <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap sm:gap-4 sm:pt-4">
             <Button size="lg" className="w-full rounded-full bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 sm:w-auto" asChild>
-              <a href={profile.links.cv} target="_blank" rel="noreferrer">
+              <a href={getCvLink(locale)} target="_blank" rel="noreferrer">
                 {copy.ctaCv}
                 <Download className="w-4 h-4" />
               </a>

@@ -5,7 +5,7 @@ import { ArrowLeft, ExternalLink, Mail } from "lucide-react"
 import { LocaleSwitcher } from "@/components/locale-switcher"
 import { useLocale } from "@/components/locale-provider"
 import { localizedCollections } from "@/lib/portfolio-localized-data"
-import { profile, siteUrl, timeline } from "@/lib/portfolio-data"
+import { getCvLink, profile, siteUrl, timeline } from "@/lib/portfolio-data"
 
 export function ResumePageContent() {
   const { copy, locale } = useLocale()
@@ -132,7 +132,7 @@ export function ResumePageContent() {
           </div>
 
           <a
-            href={profile.links.cv}
+            href={getCvLink(locale)}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
