@@ -83,10 +83,10 @@ export function Hero({ copy }) {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="space-y-5 text-center lg:text-left"
         >
-          <div className="inline-flex items-center gap-2 self-center rounded-full border border-accent/20 bg-accent/10 px-3 py-1 text-sm font-medium text-accent lg:self-auto">
+          <div className="inline-flex items-center gap-2 self-center rounded-full border border-emerald-500/30 bg-emerald-500/12 px-3 py-1 text-sm font-medium text-emerald-600 dark:text-emerald-400 lg:self-auto">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-accent opacity-75 motion-safe:animate-ping" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 motion-safe:animate-ping" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
             </span>
             {copy.availabilityBadge}
           </div>
