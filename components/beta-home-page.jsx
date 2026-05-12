@@ -21,7 +21,7 @@ function sectionId(label) {
   return label.toLowerCase().replace(/\s+/g, "-")
 }
 
-export function BetaHomePage() {
+export function BetaHomePage({ isBeta = false }) {
   const { copy, locale } = useLocale()
   const localized = localizedCollections[locale] ?? localizedCollections.en
 
@@ -71,11 +71,13 @@ export function BetaHomePage() {
       <header className="sticky top-0 z-40 border-b border-border/60 bg-background/92 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
           <div>
-            <p className="text-sm font-semibold tracking-[0.16em] text-muted-foreground">BETA</p>
+            <p className="text-sm font-semibold tracking-[0.16em] text-muted-foreground">
+              {isBeta ? "BETA" : "PORTFOLIO"}
+            </p>
             <h1 className="text-sm font-medium">{profile.name}</h1>
           </div>
 
-          <nav aria-label="Beta sections" className="hidden items-center gap-5 text-sm text-muted-foreground lg:flex">
+          <nav aria-label="Primary sections" className="hidden items-center gap-5 text-sm text-muted-foreground lg:flex">
             {sections.map((item) => (
               <a
                 key={item}
@@ -93,7 +95,7 @@ export function BetaHomePage() {
           </div>
         </div>
 
-        <nav aria-label="Beta mobile sections" className="border-t border-border/50 lg:hidden">
+        <nav aria-label="Mobile sections" className="border-t border-border/50 lg:hidden">
           <div className="no-scrollbar flex gap-2 overflow-x-auto px-4 py-3">
             {sections.map((item) => (
               <a
@@ -417,11 +419,13 @@ export function BetaHomePage() {
           </div>
         </section>
 
-        <div className="flex justify-center pt-10">
-          <Link href="/classic" className="inline-flex min-h-12 items-center justify-center rounded-full border border-border/60 px-5 py-3 text-sm font-medium transition-colors hover:border-primary/60 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-            Back to previous version
-          </Link>
-        </div>
+        {isBeta ? (
+          <div className="flex justify-center pt-10">
+            <Link href="/classic" className="inline-flex min-h-12 items-center justify-center rounded-full border border-border/60 px-5 py-3 text-sm font-medium transition-colors hover:border-primary/60 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              Back to previous version
+            </Link>
+          </div>
+        ) : null}
       </main>
     </div>
   )

@@ -9,5 +9,5 @@ export const metadata = {
 }
 
 export default function BetaVersionPage() {
-  return <BetaHomePage />
+  return <BetaHomePage isBeta />
 }
