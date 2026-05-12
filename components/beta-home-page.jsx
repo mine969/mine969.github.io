@@ -215,37 +215,39 @@ export function BetaHomePage({ isBeta = false }) {
             <h3 id="beta-experience-title" className="mt-3 text-3xl font-semibold tracking-tight">{copy.experienceSection.title}</h3>
             <p className="mt-4 max-w-3xl text-base leading-7 text-muted-foreground">{copy.experienceSection.intro}</p>
 
-            <div className="beta-card mt-8 p-5">
-              <p className="beta-accent-label text-sm uppercase tracking-[0.18em]">{copy.experienceSection.technicalTitle}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {localized.technicalSkills.map((item) => (
-                  <span key={item.name} className="rounded-full border px-3 py-2 text-sm font-medium" style={{ borderColor: "color-mix(in oklab, var(--color-chart-4) 22%, var(--color-border))" }}>
-                    {item.name}
-                  </span>
-                ))}
+            <div className="mt-8 grid gap-4 lg:grid-cols-[1.1fr_0.9fr_0.9fr]">
+              <div className="beta-card p-5">
+                <p className="beta-accent-label text-sm uppercase tracking-[0.18em]">{copy.experienceSection.technicalTitle}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {localized.technicalSkills.map((item) => (
+                    <span key={item.name} className="rounded-full border px-3 py-2 text-sm font-medium" style={{ borderColor: "color-mix(in oklab, var(--color-chart-4) 22%, var(--color-border))" }}>
+                      {item.name}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            <div className="beta-card mt-4 p-5">
-              <p className="beta-accent-label text-sm uppercase tracking-[0.18em]">{copy.experienceSection.softSkillsTitle}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {localized.softSkills.map((skill) => (
-                  <span key={skill} className="rounded-full border px-3 py-2 text-sm font-medium" style={{ borderColor: "color-mix(in oklab, var(--color-primary) 18%, var(--color-border))" }}>
-                    {skill}
-                  </span>
-                ))}
+              <div className="beta-card p-5">
+                <p className="beta-accent-label text-sm uppercase tracking-[0.18em]">{copy.experienceSection.softSkillsTitle}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {localized.softSkills.map((skill) => (
+                    <span key={skill} className="rounded-full border px-3 py-2 text-sm font-medium" style={{ borderColor: "color-mix(in oklab, var(--color-primary) 18%, var(--color-border))" }}>
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            <div className="beta-card mt-4 p-5">
-              <p className="beta-accent-label text-sm uppercase tracking-[0.18em]">{copy.experienceSection.languagesTitle}</p>
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                {localized.languagesList.map((item) => (
-                  <div key={item.name} className="flex items-center justify-between rounded-xl border px-4 py-3 text-sm" style={{ borderColor: "color-mix(in oklab, var(--color-border) 30%, transparent)" }}>
-                    <span className="font-medium">{item.name}</span>
-                    <span className="text-muted-foreground">{item.level}</span>
-                  </div>
-                ))}
+              <div className="beta-card p-5">
+                <p className="beta-accent-label text-sm uppercase tracking-[0.18em]">{copy.experienceSection.languagesTitle}</p>
+                <div className="mt-4 space-y-3">
+                  {localized.languagesList.map((item) => (
+                    <div key={item.name} className="flex items-center justify-between rounded-xl border px-4 py-3 text-sm" style={{ borderColor: "color-mix(in oklab, var(--color-border) 30%, transparent)" }}>
+                      <span className="font-medium">{item.name}</span>
+                      <span className="text-muted-foreground">{item.level}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -305,53 +307,65 @@ export function BetaHomePage({ isBeta = false }) {
           </div>
         </section>
 
-        <section id={proofId} aria-labelledby="beta-proof-title" className="grid gap-6 pt-8 sm:pt-10 lg:grid-cols-[1fr_0.9fr]">
+        <section id={proofId} aria-labelledby="beta-proof-title" className="pt-8 sm:pt-10">
           <div className="beta-panel p-5 sm:p-8">
-            <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">{copy.proof.title}</p>
-            <h3 id="beta-proof-title" className="mt-3 text-3xl font-semibold tracking-tight">{copy.proof.howHelpTitle}</h3>
-            <p className="mt-4 text-base leading-7 text-muted-foreground">{copy.proof.howHelpIntro}</p>
-
-            <div className="mt-8 grid gap-4 sm:grid-cols-3" role="list" aria-label="Key highlights">
-              <div className="beta-card p-4">
-                <p className="text-sm font-medium">{copy.highlights[0].label}</p>
-                <p className="mt-2 text-2xl font-semibold">{copy.highlights[0].value}</p>
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+              <div className="max-w-3xl">
+                <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">{copy.proof.title}</p>
+                <h3 id="beta-proof-title" className="mt-3 text-3xl font-semibold tracking-tight">{copy.proof.howHelpTitle}</h3>
+                <p className="mt-4 text-base leading-7 text-muted-foreground">{copy.proof.howHelpIntro}</p>
               </div>
-              <div className="beta-card p-4">
-                <p className="text-sm font-medium">{copy.highlights[1].label}</p>
-                <p className="mt-2 text-2xl font-semibold">{copy.highlights[1].value}</p>
-              </div>
-              <div className="beta-card p-4">
-                <p className="text-sm font-medium">{copy.highlights[2].label}</p>
-                <p className="mt-2 text-2xl font-semibold">{copy.highlights[2].value}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="beta-panel p-5 sm:p-8">
-            <div className="flex items-center justify-between gap-3">
-              <div>
-                <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">Certificates</p>
-                <h3 className="mt-3 text-3xl font-semibold tracking-tight">{copy.proof.title}</h3>
-              </div>
-              <a href={profile.links.documents} target="_blank" rel="noreferrer" className="rounded-md text-sm font-medium hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              <a
+                href={profile.links.documents}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-h-11 items-center rounded-full border px-4 py-2 text-sm font-medium hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                style={{ borderColor: "color-mix(in oklab, var(--color-border) 32%, transparent)" }}
+              >
                 {copy.proof.documents}
               </a>
             </div>
 
-            <div className="mt-8 space-y-3">
-              {localizedCertificates.map((item) => (
-                <a
-                  key={item.name}
-                  href={profile.links.documents}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="beta-card block p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  <p className="font-medium">{item.name}</p>
-                  <p className="mt-1 text-sm text-muted-foreground">{item.issuer}</p>
-                  <p className="mt-2 text-xs uppercase tracking-[0.18em] text-primary">{item.status}</p>
-                </a>
-              ))}
+            <div className="mt-6 grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
+              <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3" role="list" aria-label="Key highlights">
+                <div className="beta-card p-4">
+                  <p className="text-sm font-medium">{copy.highlights[0].label}</p>
+                  <p className="mt-2 text-2xl font-semibold">{copy.highlights[0].value}</p>
+                </div>
+                <div className="beta-card p-4">
+                  <p className="text-sm font-medium">{copy.highlights[1].label}</p>
+                  <p className="mt-2 text-2xl font-semibold">{copy.highlights[1].value}</p>
+                </div>
+                <div className="beta-card p-4">
+                  <p className="text-sm font-medium">{copy.highlights[2].label}</p>
+                  <p className="mt-2 text-2xl font-semibold">{copy.highlights[2].value}</p>
+                </div>
+              </div>
+
+              <div className="beta-card p-4 sm:p-5">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Certificates</p>
+                    <h4 className="mt-2 text-lg font-semibold">Verified learning and practice</h4>
+                  </div>
+                </div>
+
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {localizedCertificates.map((item) => (
+                    <a
+                      key={item.name}
+                      href={profile.links.documents}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="beta-card block p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      <p className="font-medium leading-6">{item.name}</p>
+                      <p className="mt-1 text-sm text-muted-foreground">{item.issuer}</p>
+                      <p className="mt-2 text-xs uppercase tracking-[0.18em] text-primary">{item.status}</p>
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
