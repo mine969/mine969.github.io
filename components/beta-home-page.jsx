@@ -225,6 +225,17 @@ export function BetaHomePage({ isBeta = false }) {
               </div>
             </div>
 
+            <div className="beta-card mt-4 p-5">
+              <p className="beta-accent-label text-sm uppercase tracking-[0.18em]">{copy.experienceSection.softSkillsTitle}</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {localized.softSkills.map((skill) => (
+                  <span key={skill} className="rounded-full border px-3 py-2 text-sm font-medium" style={{ borderColor: "color-mix(in oklab, var(--color-primary) 18%, var(--color-border))" }}>
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
             <div className="mt-8 grid gap-4 lg:grid-cols-2">
               {localizedTimeline.map((item) => (
                 <article key={`${item.title}-${item.period}`} className="beta-card p-5">

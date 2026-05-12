@@ -14,12 +14,13 @@ export const metadata = {
     template: `%s | ${profile.name}`,
   },
   description:
-    "Security-minded portfolio for Hein Htet Zaw featuring frontend delivery, DevOps workflow thinking, cybersecurity focus, and technical writing.",
+    "Security-minded portfolio for Hein Htet Zaw featuring backend-focused full-stack work, AI and DevOps interests, cybersecurity focus, and technical writing.",
   keywords: [
     "Hein Htet Zaw",
     "Cybersecurity",
+    "AI Engineer",
+    "Backend Developer",
     "DevOps",
-    "Frontend Engineer",
     "GitHub Pages",
     "Technical Portfolio",
     "Portfolio",
@@ -30,7 +31,7 @@ export const metadata = {
   openGraph: {
     title: `${profile.name} | ${profile.title}`,
     description:
-      "Portfolio featuring secure delivery thinking, frontend implementation, DevOps-minded workflow improvements, and technical notes.",
+      "Portfolio featuring backend-focused full-stack work, AI and DevOps interests, secure delivery thinking, and technical notes.",
     url: siteUrl,
     siteName: `${profile.name} Portfolio`,
     type: "website",
@@ -47,11 +48,11 @@ export const metadata = {
     card: "summary_large_image",
     title: `${profile.name} | ${profile.title}`,
     description:
-      "Security-minded portfolio featuring frontend delivery, DevOps workflow thinking, and technical notes.",
+      "Security-minded portfolio featuring backend-focused full-stack work, AI and DevOps interests, and technical notes.",
     images: [profile.socialImage],
   },
   icons: {
-    icon: "/favicon.svg",
+    icon: "/favicon.png",
   },
 }
 

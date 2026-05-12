@@ -74,7 +74,7 @@ export function HomePage() {
     },
     alumniOf: "Rangsit University",
     sameAs: [profile.links.github, profile.links.linkedin, profile.links.portfolioRepo],
-    knowsAbout: ["Cybersecurity", "DevOps", "Next.js", "Frontend Engineering", "Automation"],
+    knowsAbout: ["Cybersecurity", "Artificial Intelligence", "Deep Reinforcement Learning", "Backend Development", "DevOps", "Automation"],
   }
 
   return (
