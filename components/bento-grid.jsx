@@ -24,27 +24,6 @@ function BentoCard({ className, children, delay = 0, reducedMotion }) {
   )
 }
 
-function SkillBar({ name, level, reducedMotion }) {
-  return (
-    <div className="mb-3 last:mb-0">
-      <div className="flex justify-between items-center mb-1">
-        <span className="text-sm font-medium">{name}</span>
-        <span className="text-xs text-muted-foreground">{level}%</span>
-      </div>
-      <div className="w-full bg-secondary rounded-full h-2">
-        <motion.div
-          initial={reducedMotion ? false : { width: 0 }}
-          whileInView={reducedMotion ? undefined : { width: `${level}%` }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.2 }}
-          style={reducedMotion ? { width: `${level}%` } : undefined}
-          className="bg-primary h-2 rounded-full"
-        />
-      </div>
-    </div>
-  )
-}
-
 export function BentoGrid({ education, languages, technicalSkills, softSkills, experience, labels }) {
   const reducedMotion = useReducedMotion()
 
@@ -80,9 +59,9 @@ export function BentoGrid({ education, languages, technicalSkills, softSkills, e
 
       <BentoCard delay={0.2} className="md:col-span-2" reducedMotion={reducedMotion}>
         <h3 className="text-lg font-semibold mb-4 text-primary">{labels.technicalTitle}</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
+        <div className="flex flex-wrap gap-2">
           {technicalSkills.map((skill) => (
-            <SkillBar key={skill.name} {...skill} reducedMotion={reducedMotion} />
+            <Badge key={skill.name} variant="secondary">{skill.name}</Badge>
           ))}
         </div>
       </BentoCard>

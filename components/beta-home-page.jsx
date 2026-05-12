@@ -208,6 +208,17 @@ export function BetaHomePage() {
             <h3 id="beta-experience-title" className="mt-3 text-3xl font-semibold tracking-tight">{copy.experienceSection.title}</h3>
             <p className="mt-4 max-w-3xl text-base leading-7 text-muted-foreground">{copy.experienceSection.intro}</p>
 
+            <div className="mt-8 rounded-2xl border border-border/50 bg-background/70 p-5">
+              <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">{copy.experienceSection.technicalTitle}</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {localized.technicalSkills.map((item) => (
+                  <span key={item.name} className="rounded-full border border-border/50 px-3 py-2 text-sm font-medium">
+                    {item.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+
             <div className="mt-8 grid gap-4 lg:grid-cols-2">
               {localizedTimeline.map((item) => (
                 <article key={`${item.title}-${item.period}`} className="rounded-2xl border border-border/50 bg-background/70 p-5">
@@ -407,8 +418,8 @@ export function BetaHomePage() {
         </section>
 
         <div className="flex justify-center pt-10">
-          <Link href="/" className="inline-flex min-h-12 items-center justify-center rounded-full border border-border/60 px-5 py-3 text-sm font-medium transition-colors hover:border-primary/60 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-            Back to current version
+          <Link href="/classic" className="inline-flex min-h-12 items-center justify-center rounded-full border border-border/60 px-5 py-3 text-sm font-medium transition-colors hover:border-primary/60 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+            Back to previous version
           </Link>
         </div>
       </main>

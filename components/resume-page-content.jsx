@@ -98,11 +98,10 @@ export function ResumePageContent() {
         <div className="space-y-8">
           <div className="rounded-3xl border border-border/50 bg-card/40 p-6">
             <h2 className="text-2xl font-semibold">{copy.resume.technical}</h2>
-            <ul className="mt-5 space-y-3 text-sm">
+            <ul className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
               {localized.technicalSkills.map((item) => (
-                <li key={item.name} className="flex items-center justify-between rounded-2xl border border-border/50 bg-background/70 px-4 py-3">
+                <li key={item.name} className="rounded-2xl border border-border/50 bg-background/70 px-4 py-3">
                   <span>{item.name}</span>
-                  <span className="text-muted-foreground">{item.level}%</span>
                 </li>
               ))}
             </ul>
