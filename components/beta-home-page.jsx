@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { ExternalLink, FileText, Mail } from "lucide-react"
+import { LeadershipCommunitySection } from "@/components/leadership-community-section"
 import { LocaleSwitcher } from "@/components/locale-switcher"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
 import { useLocale } from "@/components/locale-provider"
@@ -354,6 +355,8 @@ export function BetaHomePage({ isBeta = false }) {
             </div>
           </div>
         </section>
+
+        <LeadershipCommunitySection />
 
         <section aria-labelledby="beta-notes-title" className="pt-8 sm:pt-10">
           <div className="beta-panel p-5 sm:p-8">
