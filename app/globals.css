@@ -139,4 +139,67 @@
   .skip-link {
     @apply sr-only focus:not-sr-only fixed left-4 top-4 z-[100] rounded-full bg-background px-4 py-2 text-sm font-medium shadow-lg ring-1 ring-border;
   }
+
+  .beta-shell {
+    @apply bg-background;
+    background-image:
+      radial-gradient(circle at top left, color-mix(in oklab, var(--color-primary) 18%, transparent) 0%, transparent 32%),
+      radial-gradient(circle at top right, color-mix(in oklab, var(--color-chart-4) 14%, transparent) 0%, transparent 28%),
+      linear-gradient(180deg, color-mix(in oklab, var(--color-background) 96%, black) 0%, var(--color-background) 100%);
+  }
+
+  .beta-panel {
+    @apply rounded-[2rem] border bg-card/55 backdrop-blur-md shadow-sm;
+    border-color: color-mix(in oklab, var(--color-border) 45%, transparent);
+    box-shadow:
+      0 10px 30px color-mix(in oklab, black 18%, transparent),
+      inset 0 1px 0 color-mix(in oklab, white 5%, transparent);
+  }
+
+  .beta-card {
+    @apply rounded-2xl border bg-background/78 shadow-sm transition-all duration-200;
+    border-color: color-mix(in oklab, var(--color-border) 38%, transparent);
+  }
+
+  .beta-card:hover {
+    box-shadow:
+      0 12px 28px color-mix(in oklab, black 16%, transparent),
+      0 0 0 1px color-mix(in oklab, var(--color-primary) 10%, transparent);
+    transform: translateY(-1px);
+  }
+
+  .beta-accent-label {
+    color: color-mix(in oklab, var(--color-chart-4) 62%, var(--color-muted-foreground));
+  }
+
+  .beta-primary-button {
+    background:
+      linear-gradient(135deg,
+        color-mix(in oklab, var(--color-chart-2) 32%, var(--color-primary)) 0%,
+        color-mix(in oklab, var(--color-primary) 85%, white 5%) 100%);
+    box-shadow:
+      0 10px 24px color-mix(in oklab, var(--color-chart-2) 18%, transparent),
+      inset 0 1px 0 color-mix(in oklab, white 18%, transparent);
+  }
+
+  .beta-primary-button:hover {
+    filter: brightness(1.04);
+  }
+
+  .beta-glow {
+    position: relative;
+  }
+
+  .beta-glow::before {
+    content: "";
+    position: absolute;
+    inset: -12% auto auto -6%;
+    width: 14rem;
+    height: 14rem;
+    border-radius: 9999px;
+    background: radial-gradient(circle, color-mix(in oklab, var(--color-chart-2) 18%, transparent) 0%, transparent 68%);
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(18px);
+  }
 }
