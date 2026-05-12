@@ -8,7 +8,7 @@ Keep content in data files and keep components focused on layout.
 
 Main files:
 
-- `lib/portfolio-data.js`: global profile data, links, projects, timeline
+- `lib/portfolio-data.js`: global profile data, links, projects, timeline, leadership/community data
 - `lib/portfolio-copy.js`: translated UI copy and section text
 - `lib/portfolio-localized-data.js`: localized lists such as project titles, certificates, skills, and timeline summaries
 
@@ -24,9 +24,16 @@ Main files:
 Edit in `lib/portfolio-data.js`:
 
 - `profile.links.cv`
+- `profile.links.cvJapan`
 - `profile.links.documents`
 - `profile.links.github`
 - `profile.links.linkedin`
+
+CV selection behavior:
+
+- default locales use `profile.links.cv`
+- Japanese locale uses `profile.links.cvJapan`
+- selection is handled by `getCvLink(locale)`
 
 ### 3. Add a new project
 
@@ -52,9 +59,26 @@ Certificate cards are driven from:
 - matching names in `lib/portfolio-localized-data.js`
 - translated issuer/status labels in `lib/portfolio-copy.js`
 
-If certificate links need to become individual links later, replace the shared `profile.links.documents` usage in `components/home-page.jsx` with per-item URLs.
+If certificate links need to become individual links later, replace the shared `profile.links.documents` usage in `components/beta-home-page.jsx` and `components/home-page.jsx` with per-item URLs.
 
-### 5. Update translations
+### 5. Update leadership and community section
+
+Leadership and event proof data lives in:
+
+- `leadershipCommunity` in `lib/portfolio-data.js`
+
+Section component:
+
+- `components/leadership-community-section.jsx`
+
+Photos live in:
+
+- `public/community/`
+
+Keep event photo captions short and recruiter-friendly.
+Avoid turning the section into a casual gallery.
+
+### 6. Update translations
 
 Languages currently supported:
 
@@ -132,13 +156,23 @@ npm run build
 ## Current Important Assets
 
 - Main profile photo: `public/images/profile-main.jpg`
+- Browser tab icon: `public/favicon.png`
+- Leadership event photos: `public/community/`
 - Flag icons: `public/flags/`
 
 ## Current Important Pages
 
 - Home: `app/page.jsx`
+- Classic backup: `app/classic/page.jsx`
+- Review route: `app/new-ver/page.jsx`
 - Resume: `app/resume/page.jsx`
 - Notes: `app/notes/page.jsx`
+
+## Current Main Components
+
+- Promoted main homepage: `components/beta-home-page.jsx`
+- Classic homepage: `components/home-page.jsx`
+- Leadership section: `components/leadership-community-section.jsx`
 
 ## Content Style Guidance
 
