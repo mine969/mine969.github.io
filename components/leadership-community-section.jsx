@@ -7,7 +7,7 @@ export function LeadershipCommunitySection() {
   const localizedLeadership = copy.leadershipCommunity
 
   return (
-    <section aria-labelledby="leadership-community-title" className="pt-8 sm:pt-10">
+    <section id="activities" aria-labelledby="leadership-community-title" className="scroll-mt-24 pt-8 sm:pt-10">
       <div className="beta-panel p-5 sm:p-8">
         <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">{localizedLeadership.label}</p>
         <h3 id="leadership-community-title" className="mt-3 text-3xl font-semibold tracking-tight">

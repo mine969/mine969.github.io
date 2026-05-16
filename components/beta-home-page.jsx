@@ -2,10 +2,12 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { ExternalLink, FileText, Mail } from "lucide-react"
+import { Clock3, ExternalLink, FileText, Github, Linkedin, Mail, MapPin, MessageCircle, Phone, Send } from "lucide-react"
 import { LeadershipCommunitySection } from "@/components/leadership-community-section"
 import { LocaleSwitcher } from "@/components/locale-switcher"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 import { useLocale } from "@/components/locale-provider"
 import { localizedCollections } from "@/lib/portfolio-localized-data"
 import {
@@ -53,19 +55,74 @@ export function BetaHomePage({ isBeta = false }) {
     summary: copy.notes[index]?.summary ?? item.summary,
   }))
 
-  const sections = [
-    copy.nav.about,
-    copy.nav.experience,
-    copy.nav.projects,
-    copy.proof.title,
-    copy.nav.contact,
-  ]
-
   const aboutId = sectionId(copy.nav.about)
   const experienceId = sectionId(copy.nav.experience)
   const projectsId = sectionId(copy.nav.projects)
   const proofId = sectionId(copy.proof.title)
   const contactId = sectionId(copy.nav.contact)
+
+  const sections = [
+    { label: copy.nav.about, href: `#${aboutId}` },
+    { label: copy.nav.experience, href: `#${experienceId}` },
+    { label: copy.nav.projects, href: `#${projectsId}` },
+    { label: copy.nav.activities, href: "#activities" },
+    { label: copy.nav.contact, href: `#${contactId}` },
+  ]
+
+  const contactDetails = [
+    {
+      label: "Email",
+      value: profile.email,
+      href: `mailto:${profile.email}`,
+      icon: Mail,
+    },
+    {
+      label: `${copy.contact.phone} (TH)`,
+      value: profile.phones.thailand,
+      href: `tel:${profile.phones.thailand}`,
+      icon: Phone,
+    },
+    {
+      label: `${copy.contact.phone} (JP)`,
+      value: profile.phones.japan,
+      href: `tel:${profile.phones.japan}`,
+      icon: Phone,
+    },
+    {
+      label: copy.contact.line,
+      value: profile.lineId,
+      href: profile.links.line,
+      icon: MessageCircle,
+    },
+    {
+      label: copy.contact.location,
+      value: profile.location,
+      icon: MapPin,
+    },
+    {
+      label: copy.contact.timezone,
+      value: profile.timezone,
+      icon: Clock3,
+    },
+  ]
+
+  function handleContactSubmit(event) {
+    event.preventDefault()
+
+    const formData = new FormData(event.currentTarget)
+    const name = String(formData.get("name") ?? "").trim()
+    const email = String(formData.get("email") ?? "").trim()
+    const message = String(formData.get("message") ?? "").trim()
+    const subject = encodeURIComponent(`Portfolio inquiry from ${name || "Website visitor"}`)
+    const body = encodeURIComponent([
+      `Name: ${name || "-"}`,
+      `Email: ${email || "-"}`,
+      "",
+      message,
+    ].join("\n"))
+
+    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`
+  }
 
   return (
     <div className="beta-shell min-h-screen text-foreground">
@@ -81,11 +138,11 @@ export function BetaHomePage({ isBeta = false }) {
           <nav aria-label="Primary sections" className="hidden items-center gap-5 text-sm text-muted-foreground lg:flex">
             {sections.map((item) => (
               <a
-                key={item}
-                href={`#${sectionId(item)}`}
+                key={item.label}
+                href={item.href}
                 className="rounded-full px-1 py-1 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                {item}
+                {item.label}
               </a>
             ))}
           </nav>
@@ -100,12 +157,12 @@ export function BetaHomePage({ isBeta = false }) {
           <div className="no-scrollbar flex gap-2 overflow-x-auto px-4 py-3">
             {sections.map((item) => (
               <a
-                key={item}
-                href={`#${sectionId(item)}`}
+                key={item.label}
+                href={item.href}
                 className="shrink-0 rounded-full border bg-background/80 px-3 py-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 style={{ borderColor: "color-mix(in oklab, var(--color-border) 32%, transparent)" }}
               >
-                {item}
+                {item.label}
               </a>
             ))}
           </div>
@@ -391,77 +448,160 @@ export function BetaHomePage({ isBeta = false }) {
 
         <section id={contactId} aria-labelledby="beta-contact-title" className="pt-8 sm:pt-10">
           <div className="beta-panel p-5 sm:p-8">
-            <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">{copy.nav.contact}</p>
-            <h3 id="beta-contact-title" className="mt-3 text-3xl font-semibold tracking-tight">{copy.contact.title}</h3>
-            <p className="mt-4 max-w-3xl text-base leading-7 text-muted-foreground">{copy.contact.intro}</p>
-
-            <div className="mt-8 grid gap-3 sm:grid-cols-3">
-              <a
-                href={getCvLink(locale)}
-                target="_blank"
-                rel="noreferrer"
-                className="beta-primary-button inline-flex min-h-12 items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <FileText className="mr-2 h-4 w-4" />
-                {copy.contact.cv}
-              </a>
-              <a
-                href={`mailto:${profile.email}`}
-                className="inline-flex min-h-12 items-center justify-center rounded-full border px-6 py-3 text-sm font-medium transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                style={{ borderColor: "color-mix(in oklab, var(--color-border) 32%, transparent)" }}
-              >
-                <Mail className="mr-2 h-4 w-4" />
-                {profile.email}
-              </a>
-              <a
-                href={profile.links.documents}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex min-h-12 items-center justify-center rounded-full border px-6 py-3 text-sm font-medium transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                style={{ borderColor: "color-mix(in oklab, var(--color-border) 32%, transparent)" }}
-              >
-                <ExternalLink className="mr-2 h-4 w-4" />
-                {copy.contact.documents}
-              </a>
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">{copy.nav.contact}</p>
+              <h3 id="beta-contact-title" className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+                {copy.contact.title}
+              </h3>
+              <p className="mt-4 text-base leading-7 text-muted-foreground">{copy.contact.intro}</p>
             </div>
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <a href={`mailto:${profile.email}`} className="beta-card p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Email</p>
-                <p className="mt-2 text-sm font-medium">{profile.email}</p>
-              </a>
-              <div className="beta-card p-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{copy.contact.location}</p>
-                <p className="mt-2 text-sm font-medium">{profile.location}</p>
-              </div>
-              <div className="beta-card p-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{copy.contact.timezone}</p>
-                <p className="mt-2 text-sm font-medium">{profile.timezone}</p>
-              </div>
-              <div className="rounded-2xl border p-4 sm:col-span-2 lg:col-span-1" style={{ borderColor: "color-mix(in oklab, var(--color-chart-4) 18%, var(--color-border))", background: "color-mix(in oklab, var(--color-chart-4) 8%, var(--color-background))" }}>
-                <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{copy.contact.profiles}</p>
-                <div className="mt-3 grid gap-3">
+            <div className="mt-10 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+              <div className="beta-card p-5 sm:p-7">
+                <h4 className="text-xl font-semibold">{copy.contact.detailsTitle}</h4>
+                <p className="mt-3 text-sm leading-6 text-muted-foreground">{copy.contact.detailsIntro}</p>
+
+                <div className="mt-6 space-y-3">
+                  {contactDetails.map((item) => {
+                    const Icon = item.icon
+
+                    return item.href ? (
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        className="flex items-start gap-4 rounded-2xl border border-border/50 bg-background/75 p-4 transition-colors hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      >
+                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                          <Icon className="h-5 w-5" />
+                        </span>
+                        <span>
+                          <span className="block text-xs uppercase tracking-[0.18em] text-muted-foreground">{item.label}</span>
+                          <span className="mt-2 block text-sm font-medium text-foreground">{item.value}</span>
+                        </span>
+                      </a>
+                    ) : (
+                      <div key={item.label} className="flex items-start gap-4 rounded-2xl border border-border/50 bg-background/75 p-4">
+                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                          <Icon className="h-5 w-5" />
+                        </span>
+                        <span>
+                          <span className="block text-xs uppercase tracking-[0.18em] text-muted-foreground">{item.label}</span>
+                          <span className="mt-2 block text-sm font-medium text-foreground">{item.value}</span>
+                        </span>
+                      </div>
+                    )
+                  })}
+                </div>
+
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
                   <a
                     href={profile.links.linkedin}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex min-h-12 items-center justify-between rounded-xl border bg-background px-4 py-3 text-sm font-semibold transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                    style={{ borderColor: "color-mix(in oklab, var(--color-border) 32%, transparent)" }}
+                    className="inline-flex min-h-12 items-center justify-between rounded-2xl border border-border/50 bg-background/75 px-4 py-3 text-sm font-semibold transition-colors hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
-                    <span>LinkedIn</span>
+                    <span className="inline-flex items-center gap-3">
+                      <Linkedin className="h-4 w-4" />
+                      LinkedIn
+                    </span>
                     <ExternalLink className="h-4 w-4" />
                   </a>
                   <a
                     href={profile.links.github}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex min-h-12 items-center justify-between rounded-xl border bg-background px-4 py-3 text-sm font-semibold transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                    style={{ borderColor: "color-mix(in oklab, var(--color-border) 32%, transparent)" }}
+                    className="inline-flex min-h-12 items-center justify-between rounded-2xl border border-border/50 bg-background/75 px-4 py-3 text-sm font-semibold transition-colors hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
-                    <span>GitHub</span>
+                    <span className="inline-flex items-center gap-3">
+                      <Github className="h-4 w-4" />
+                      GitHub
+                    </span>
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                  <a
+                    href={getCvLink(locale)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex min-h-12 items-center justify-between rounded-2xl border border-border/50 bg-background/75 px-4 py-3 text-sm font-semibold transition-colors hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    <span className="inline-flex items-center gap-3">
+                      <FileText className="h-4 w-4" />
+                      {copy.contact.cv}
+                    </span>
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                  <a
+                    href={profile.links.documents}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex min-h-12 items-center justify-between rounded-2xl border border-border/50 bg-background/75 px-4 py-3 text-sm font-semibold transition-colors hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    <span className="inline-flex items-center gap-3">
+                      <ExternalLink className="h-4 w-4" />
+                      {copy.contact.documents}
+                    </span>
                     <ExternalLink className="h-4 w-4" />
                   </a>
                 </div>
+              </div>
+
+              <div className="beta-card p-5 sm:p-7">
+                <h4 className="text-xl font-semibold">{copy.contact.messageTitle}</h4>
+                <p className="mt-3 text-sm leading-6 text-muted-foreground">{copy.contact.messageIntro}</p>
+
+                <form className="mt-6 space-y-5" onSubmit={handleContactSubmit}>
+                  <div>
+                    <label htmlFor="contact-name" className="text-sm font-medium text-foreground">
+                      {copy.contact.nameLabel}
+                    </label>
+                    <Input
+                      id="contact-name"
+                      name="name"
+                      type="text"
+                      required
+                      placeholder={copy.contact.namePlaceholder}
+                      className="mt-2 h-12 rounded-2xl border-border/50 bg-background/75 px-4"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="contact-email" className="text-sm font-medium text-foreground">
+                      {copy.contact.emailLabel}
+                    </label>
+                    <Input
+                      id="contact-email"
+                      name="email"
+                      type="email"
+                      required
+                      placeholder={copy.contact.emailPlaceholder}
+                      className="mt-2 h-12 rounded-2xl border-border/50 bg-background/75 px-4"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="contact-message" className="text-sm font-medium text-foreground">
+                      {copy.contact.messageLabel}
+                    </label>
+                    <Textarea
+                      id="contact-message"
+                      name="message"
+                      required
+                      rows={6}
+                      placeholder={copy.contact.messagePlaceholder}
+                      className="mt-2 min-h-36 rounded-2xl border-border/50 bg-background/75 px-4 py-3"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="beta-primary-button inline-flex min-h-12 w-full items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    <Send className="mr-2 h-4 w-4" />
+                    {copy.contact.send}
+                  </button>
+                </form>
+
+                <p className="mt-4 text-sm text-muted-foreground">{copy.contact.formNote}</p>
               </div>
             </div>
           </div>

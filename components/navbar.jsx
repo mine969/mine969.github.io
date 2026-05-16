@@ -6,7 +6,7 @@ import { LocaleSwitcher } from "@/components/locale-switcher"
 import { useLocale } from "@/components/locale-provider"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
-import { Home, User, Briefcase, Code, Mail } from "lucide-react"
+import { Home, User, Briefcase, Code, Users, Mail } from "lucide-react"
 
 export function Navbar() {
   const { scrollY } = useScroll()
@@ -29,6 +29,7 @@ export function Navbar() {
     { name: copy.nav.about, href: "#about", icon: User },
     { name: copy.nav.experience, href: "#experience", icon: Briefcase },
     { name: copy.nav.projects, href: "#projects", icon: Code },
+    { name: copy.nav.activities, href: "#activities", icon: Users },
     { name: copy.nav.contact, href: "#contact", icon: Mail },
   ]
 

@@ -5,6 +5,7 @@ import { ArrowRight, ExternalLink, FileText, Mail } from "lucide-react"
 import { Navbar } from "@/components/navbar"
 import { Hero } from "@/components/hero"
 import { BentoGrid } from "@/components/bento-grid"
+import { LeadershipCommunitySection } from "@/components/leadership-community-section"
 import { ProjectCard } from "@/components/project-card"
 import { useLocale } from "@/components/locale-provider"
 import { localizedCollections } from "@/lib/portfolio-localized-data"
@@ -162,6 +163,8 @@ export function HomePage() {
             ))}
           </div>
         </section>
+
+        <LeadershipCommunitySection />
 
         <section className="scroll-mt-24" aria-labelledby="proof-title">
           <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
