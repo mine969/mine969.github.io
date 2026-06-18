@@ -1,6 +1,5 @@
 import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
-import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import "./globals.css"
 import { LocaleProvider } from "@/components/locale-provider"
@@ -14,24 +13,28 @@ export const metadata = {
     template: `%s | ${profile.name}`,
   },
   description:
-    "Security-minded portfolio for Hein Htet Zaw featuring backend-focused full-stack work, AI and DevOps interests, cybersecurity focus, and technical writing.",
+    "Portfolio of Hein Htet Zaw — cybersecurity, cloud computing (AWS CLF-C02), AI, DevOps, and backend development. Open to graduate roles in Thailand, Myanmar, and Japan.",
   keywords: [
     "Hein Htet Zaw",
     "Cybersecurity",
+    "Cloud Computing",
+    "AWS",
+    "AWS Certified Cloud Practitioner",
     "AI Engineer",
     "Backend Developer",
     "DevOps",
     "GitHub Pages",
     "Technical Portfolio",
     "Portfolio",
+    "Bangkok",
   ],
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: `${profile.name} | ${profile.title}`,
+    title: `${profile.name} | Cybersecurity · Cloud · AI · DevOps`,
     description:
-      "Portfolio featuring backend-focused full-stack work, AI and DevOps interests, secure delivery thinking, and technical notes.",
+      "Portfolio of Hein Htet Zaw — cybersecurity, AWS cloud (CLF-C02), AI, DevOps, and backend development. Based in Bangkok, open to graduate roles.",
     url: siteUrl,
     siteName: `${profile.name} Portfolio`,
     type: "website",
@@ -39,16 +42,16 @@ export const metadata = {
       {
         url: profile.socialImage,
         width: 1200,
-        height: 1200,
-        alt: profile.name,
+        height: 630,
+        alt: `${profile.name} — Cybersecurity, Cloud & AI Engineer`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${profile.name} | ${profile.title}`,
+    title: `${profile.name} | Cybersecurity · Cloud · AI · DevOps`,
     description:
-      "Security-minded portfolio featuring backend-focused full-stack work, AI and DevOps interests, and technical notes.",
+      "Portfolio of Hein Htet Zaw — cybersecurity, AWS CLF-C02, AI, DevOps, and backend development. Based in Bangkok.",
     images: [profile.socialImage],
   },
   icons: {
@@ -73,7 +76,6 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Suspense fallback={null}>{children}</Suspense>
-            <Analytics />
           </ThemeProvider>
         </LocaleProvider>
       </body>

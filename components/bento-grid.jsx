@@ -59,9 +59,24 @@ export function BentoGrid({ education, languages, technicalSkills, softSkills, e
 
       <BentoCard delay={0.2} className="md:col-span-2" reducedMotion={reducedMotion}>
         <h3 className="text-lg font-semibold mb-4 text-primary">{labels.technicalTitle}</h3>
-        <div className="flex flex-wrap gap-2">
+        <div className="space-y-2.5">
           {technicalSkills.map((skill) => (
-            <Badge key={skill.name} variant="secondary">{skill.name}</Badge>
+            <div key={skill.name}>
+              <div className="flex justify-between items-center mb-1">
+                <span className="text-sm">{skill.name}</span>
+                <span className="text-xs text-muted-foreground">{skill.level}%</span>
+              </div>
+              <div className="h-1.5 w-full rounded-full bg-border/40 overflow-hidden">
+                <motion.div
+                  className="h-full rounded-full bg-primary"
+                  initial={reducedMotion ? false : { width: 0 }}
+                  whileInView={reducedMotion ? undefined : { width: `${skill.level}%` }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+                  style={reducedMotion ? { width: `${skill.level}%` } : undefined}
+                />
+              </div>
+            </div>
           ))}
         </div>
       </BentoCard>

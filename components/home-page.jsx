@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowRight, ExternalLink, FileText, Mail } from "lucide-react"
+import { ExternalLink, FileText, Mail } from "lucide-react"
 import { Navbar } from "@/components/navbar"
 import { Hero } from "@/components/hero"
 import { BentoGrid } from "@/components/bento-grid"
@@ -12,7 +12,6 @@ import { localizedCollections } from "@/lib/portfolio-localized-data"
 import {
   certifications,
   getCvLink,
-  notes,
   profile,
   projects,
   services,
@@ -45,13 +44,6 @@ export function HomePage() {
     status: copy.certifications[index]?.status ?? item.status,
   }))
 
-  const localizedNotes = notes.map((item, index) => ({
-    ...item,
-    title: localized.notes[index]?.title ?? item.title,
-    summary: copy.notes[index]?.summary ?? item.summary,
-    audience: copy.notes[index]?.audience ?? item.audience,
-  }))
-
   const localizedTimeline = timeline.map((item, index) => ({
     ...item,
     title: localized.timeline[index]?.title ?? item.title,
@@ -75,7 +67,7 @@ export function HomePage() {
     },
     alumniOf: "Rangsit University",
     sameAs: [profile.links.github, profile.links.linkedin, profile.links.portfolioRepo],
-    knowsAbout: ["Cybersecurity", "Artificial Intelligence", "Deep Reinforcement Learning", "Backend Development", "DevOps", "Automation"],
+    knowsAbout: ["Cybersecurity", "Artificial Intelligence", "Deep Reinforcement Learning", "Cloud Computing", "Backend Development", "DevOps", "Automation"],
   }
 
   return (
@@ -186,7 +178,7 @@ export function HomePage() {
                 {localizedCertifications.map((item) => (
                   <a
                     key={item.name}
-                    href={profile.links.documents}
+                    href={item.localPdf ?? item.url ?? profile.links.documents}
                     target="_blank"
                     rel="noreferrer"
                     className="block rounded-2xl border border-border/50 bg-background/70 p-4 transition-colors hover:border-primary/50"
@@ -194,6 +186,9 @@ export function HomePage() {
                     <p className="font-medium">{item.name}</p>
                     <p className="mt-1 text-sm text-muted-foreground">{item.issuer}</p>
                     <p className="mt-2 text-xs uppercase tracking-[0.2em] text-primary">{item.status}</p>
+                    {item.verifyCode && (
+                      <p className="mt-1 text-xs text-muted-foreground">Code: {item.verifyCode}</p>
+                    )}
                   </a>
                 ))}
               </div>
@@ -246,36 +241,6 @@ export function HomePage() {
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="scroll-mt-24" aria-labelledby="notes-title">
-          <div className="rounded-3xl border border-border/50 bg-card/40 p-5 sm:p-6 md:p-8">
-            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-              <div>
-                <h2 id="notes-title" className="text-3xl font-bold tracking-tight">
-                  {copy.notesSection.title}
-                </h2>
-                <p className="mt-3 max-w-2xl text-muted-foreground">{copy.notesSection.intro}</p>
-              </div>
-              <Link
-                href="/notes"
-                className="inline-flex items-center gap-2 rounded-full border border-border/60 px-5 py-3 text-sm font-medium transition-colors hover:border-primary/60 hover:text-primary"
-              >
-                {copy.notesSection.viewAll}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-
-            <div className="mt-6 grid gap-4 sm:mt-8 sm:gap-6 md:grid-cols-3">
-              {localizedNotes.map((note) => (
-                <article key={note.title} className="rounded-2xl border border-border/50 bg-background/70 p-4 sm:p-5">
-                  <p className="text-xs uppercase tracking-[0.2em] text-primary">{note.audience}</p>
-                  <h3 className="mt-3 text-lg font-semibold">{note.title}</h3>
-                  <p className="mt-3 text-sm text-muted-foreground">{note.summary}</p>
-                </article>
-              ))}
             </div>
           </div>
         </section>

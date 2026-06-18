@@ -39,7 +39,6 @@ export function NotesPageContent() {
             <p className="text-xs uppercase tracking-[0.2em] text-primary">{note.audience}</p>
             <h2 className="mt-3 text-xl font-semibold">{note.title}</h2>
             <p className="mt-3 text-sm text-muted-foreground">{note.summary}</p>
-            <p className="mt-5 text-xs uppercase tracking-[0.2em] text-muted-foreground">{copy.notesSection.draftTopicBank}</p>
           </article>
         ))}
       </section>
