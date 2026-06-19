@@ -13,7 +13,7 @@ export const metadata = {
     template: `%s | ${profile.name}`,
   },
   description:
-    "Portfolio of Hein Htet Zaw — cybersecurity, cloud computing (AWS CLF-C02), AI, DevOps, and backend development. Open to graduate roles in Thailand, Myanmar, and Japan.",
+    "Portfolio of Hein Htet Zaw — cybersecurity, cloud computing (AWS CLF-C02), AI, DevOps, and backend development. Open to entry to mid-level and full-time roles in Thailand, Myanmar, and Japan.",
   keywords: [
     "Hein Htet Zaw",
     "Cybersecurity",
@@ -34,7 +34,7 @@ export const metadata = {
   openGraph: {
     title: `${profile.name} | Cybersecurity · Cloud · AI · DevOps`,
     description:
-      "Portfolio of Hein Htet Zaw — cybersecurity, AWS cloud (CLF-C02), AI, DevOps, and backend development. Based in Bangkok, open to graduate roles.",
+      "Portfolio of Hein Htet Zaw — cybersecurity, AWS cloud (CLF-C02), AI, DevOps, and backend development. Based in Bangkok, open to entry to mid-level and full-time opportunities.",
     url: siteUrl,
     siteName: `${profile.name} Portfolio`,
     type: "website",

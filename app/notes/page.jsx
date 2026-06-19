@@ -6,6 +6,7 @@ export const metadata = {
   alternates: {
     canonical: "/notes",
   },
+  robots: { index: false, follow: false },
 }
 
 export default function NotesPage() {
