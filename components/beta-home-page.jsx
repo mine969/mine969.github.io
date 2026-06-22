@@ -13,7 +13,6 @@ import { localizedCollections } from "@/lib/portfolio-localized-data"
 import {
   certifications,
   getCvLink,
-  notes,
   profile,
   projects,
   siteUrl,
@@ -47,12 +46,6 @@ export function BetaHomePage({ isBeta = false }) {
     ...item,
     title: localized.timeline[index]?.title ?? item.title,
     summary: localized.timeline[index]?.summary ?? item.summary,
-  }))
-
-  const localizedNotes = notes.map((item, index) => ({
-    ...item,
-    title: localized.notes[index]?.title ?? item.title,
-    summary: copy.notes[index]?.summary ?? item.summary,
   }))
 
   const aboutId = sectionId(copy.nav.about)
@@ -428,23 +421,6 @@ export function BetaHomePage({ isBeta = false }) {
         </section>
 
         <LeadershipCommunitySection />
-
-        <section aria-labelledby="beta-notes-title" className="pt-8 sm:pt-10">
-          <div className="beta-panel p-5 sm:p-8">
-            <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">Notes</p>
-            <h3 id="beta-notes-title" className="mt-3 text-3xl font-semibold tracking-tight">{copy.notesSection.title}</h3>
-            <p className="mt-4 max-w-3xl text-base leading-7 text-muted-foreground">{copy.notesSection.intro}</p>
-
-            <div className="mt-8 grid gap-4 lg:grid-cols-3">
-              {localizedNotes.map((note) => (
-                <article key={note.title} className="beta-card p-5">
-                  <h4 className="text-lg font-semibold">{note.title}</h4>
-                  <p className="mt-3 text-sm leading-6 text-muted-foreground">{note.summary}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
 
         <section id={contactId} aria-labelledby="beta-contact-title" className="pt-8 sm:pt-10">
           <div className="beta-panel p-5 sm:p-8">
