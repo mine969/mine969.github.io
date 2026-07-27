@@ -404,7 +404,7 @@ export function BetaHomePage({ isBeta = false }) {
                   {localizedCertificates.map((item) => (
                     <a
                       key={item.name}
-                      href={profile.links.documents}
+                      href={item.localPdf ?? item.url ?? profile.links.documents}
                       target="_blank"
                       rel="noreferrer"
                       className="beta-card block p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
