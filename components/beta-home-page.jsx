@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Clock3, ExternalLink, FileText, Github, Linkedin, Mail, MapPin, MessageCircle, Phone, Send, Sparkles } from "lucide-react"
+import { Clock3, ExternalLink, FileText, Github, Link2, Linkedin, Mail, MapPin, MessageCircle, Phone, Send, Sparkles } from "lucide-react"
 import { LeadershipCommunitySection } from "@/components/leadership-community-section"
 import { LocaleSwitcher } from "@/components/locale-switcher"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
@@ -471,6 +471,18 @@ export function BetaHomePage({ isBeta = false }) {
                 </div>
 
                 <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  <a
+                    href={profile.links.linktree}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex min-h-12 items-center justify-between rounded-2xl border border-primary/30 bg-primary/5 px-4 py-3 text-sm font-semibold text-primary transition-colors hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:col-span-2"
+                  >
+                    <span className="inline-flex items-center gap-3">
+                      <Link2 className="h-4 w-4" />
+                      All my links (Linktree)
+                    </span>
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
                   <a
                     href={profile.links.linkedin}
                     target="_blank"
