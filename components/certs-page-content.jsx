@@ -12,6 +12,7 @@ import {
   FileText,
   Filter,
   Github,
+  GraduationCap,
   RefreshCw,
   Search,
   Timer,
@@ -26,7 +27,14 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { profile } from "@/lib/portfolio-data"
-import { certSourceCredit, certifications, domainLabels, domainOrder } from "@/lib/certs-data"
+import {
+  certSourceCredit,
+  certifications,
+  domainLabels,
+  domainOrder,
+  ehuAcademy,
+  ehuLearningPaths,
+} from "@/lib/certs-data"
 
 function tierForLevel(level) {
   if (level == null) return "Unrated"
@@ -381,6 +389,24 @@ export function CertsPageContent() {
                       : "Does not expire"}
                   </p>
                 </div>
+                {ehuLearningPaths[activeCert.domain] ? (
+                  <div className="rounded-xl border border-primary/30 bg-primary/5 p-3 sm:col-span-2">
+                    <p className="flex items-center gap-1.5 text-xs uppercase tracking-wide text-muted-foreground">
+                      <GraduationCap className="h-3.5 w-3.5" />
+                      Study it on {ehuAcademy.name}
+                    </p>
+                    <a
+                      href={ehuAcademy.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-1 inline-flex items-center gap-1 font-medium text-primary hover:underline"
+                    >
+                      Part {ehuLearningPaths[activeCert.domain].part} ·{" "}
+                      {ehuLearningPaths[activeCert.domain].label}
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
+                  </div>
+                ) : null}
               </div>
 
               <div className="flex flex-col gap-2 pt-2 sm:flex-row">
@@ -393,6 +419,17 @@ export function CertsPageContent() {
                   <ExternalLink className="h-4 w-4" />
                   Visit official certification page
                 </a>
+                {ehuLearningPaths[activeCert.domain] ? (
+                  <a
+                    href={ehuAcademy.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-primary/40 px-4 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-primary/10"
+                  >
+                    <GraduationCap className="h-4 w-4" />
+                    Learn on {ehuAcademy.name}
+                  </a>
+                ) : null}
                 {activeCert.source && activeCert.source !== activeCert.vendorUrl ? (
                   <a
                     href={activeCert.source}
