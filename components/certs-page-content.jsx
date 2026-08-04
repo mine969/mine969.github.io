@@ -184,12 +184,12 @@ export function CertsPageContent() {
         </div>
       </div>
 
-      <section className="mt-8 rounded-3xl border border-border/50 bg-card/40 p-8">
+      <section className="mt-8 rounded-3xl border border-border/50 bg-card/40 p-5 sm:p-8">
         <p className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-muted-foreground">
           <Award className="h-4 w-4 text-primary" />
           Certification Roadmap
         </p>
-        <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
+        <h1 className="mt-3 text-2xl font-bold tracking-tight sm:text-4xl md:text-5xl">
           Technical Security Certification Roadmap
         </h1>
         <p className="mt-4 max-w-3xl text-muted-foreground">
@@ -302,20 +302,19 @@ export function CertsPageContent() {
           No certifications match those filters.
         </p>
       ) : (
-        <div className="mt-8 overflow-x-auto pb-4">
-          <div
-            className="grid gap-3"
-            style={{
-              gridTemplateColumns: `repeat(${activeTierDomains.length}, minmax(210px, 1fr))`,
-              minWidth: activeTierDomains.length * 220,
-            }}
-          >
+        <div className="mt-8">
+          {activeTierDomains.length > 1 ? (
+            <p className="mb-2 text-center text-xs text-muted-foreground lg:hidden">
+              ← Swipe to browse all domains, or pick one from the domain filter above →
+            </p>
+          ) : null}
+          <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth px-4 pb-4 sm:mx-0 sm:px-0">
             {activeTierDomains.map((domain) => (
               <div
                 key={domain}
-                className={`rounded-2xl border-t-2 border-border/50 bg-card/30 p-3 ${
-                  domainBand[domain] ? bandDot[domainBand[domain]].replace("bg-", "border-t-") : ""
-                }`}
+                className={`w-[78vw] shrink-0 snap-start rounded-2xl border-t-2 border-border/50 bg-card/30 p-3 xs:w-[240px] sm:w-[220px] md:w-[210px] ${
+                  activeTierDomains.length === 1 ? "sm:w-full md:w-full" : ""
+                } ${domainBand[domain] ? bandDot[domainBand[domain]].replace("bg-", "border-t-") : ""}`}
               >
                 <p className="mb-1 flex items-center justify-center gap-1.5 truncate text-center text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                   <span className={`h-2 w-2 shrink-0 rounded-full ${bandDot[domainBand[domain]] ?? "bg-muted-foreground"}`} />
@@ -356,7 +355,7 @@ export function CertsPageContent() {
         </div>
       )}
 
-      <section className="mt-12 rounded-3xl border border-border/50 bg-card/40 p-8 text-center">
+      <section className="mt-12 rounded-3xl border border-border/50 bg-card/40 p-5 text-center sm:p-8">
         <p className="text-sm text-muted-foreground">
           Data curated for {profile.name}&rsquo;s personal reference. Spotted an error, or want a
           domain expanded? Reach out.

@@ -99,18 +99,18 @@ export function HubPageContent() {
         </div>
       </div>
 
-      <section className="mt-8 rounded-3xl border border-border/50 bg-card/40 p-8">
+      <section className="mt-8 rounded-3xl border border-border/50 bg-card/40 p-5 sm:p-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-muted-foreground">
               <Sparkles className="h-4 w-4 text-primary" />
               {hubMeta.subtitle}
             </p>
-            <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">{hubMeta.title}</h1>
+            <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">{hubMeta.title}</h1>
             <p className="mt-4 max-w-2xl text-muted-foreground">{hubMeta.description}</p>
           </div>
 
-          <div className="w-full max-w-sm">
+          <div className="w-full max-w-sm lg:max-w-xs xl:max-w-sm">
             <label htmlFor="hub-search" className="sr-only">
               Search the collection
             </label>
@@ -222,7 +222,7 @@ export function HubPageContent() {
         </section>
       )}
 
-      <section className="mt-12 rounded-3xl border border-border/50 bg-card/40 p-8 text-center">
+      <section className="mt-12 rounded-3xl border border-border/50 bg-card/40 p-5 text-center sm:p-8">
         <p className="text-sm text-muted-foreground">
           Built and maintained by {profile.name}. Found something broken or have a resource I should add?
         </p>
