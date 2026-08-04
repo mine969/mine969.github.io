@@ -15,6 +15,7 @@ import {
   GraduationCap,
   RefreshCw,
   Search,
+  Star,
   Timer,
 } from "lucide-react"
 import { Input } from "@/components/ui/input"
@@ -30,10 +31,12 @@ import { profile } from "@/lib/portfolio-data"
 import {
   certSourceCredit,
   certifications,
+  domainBand,
   domainLabels,
   domainOrder,
   ehuAcademy,
   ehuLearningPaths,
+  freeLearningResources,
 } from "@/lib/certs-data"
 
 function tierForLevel(level) {
@@ -63,6 +66,43 @@ const tierDot = {
   Associate: "bg-emerald-500",
   Entry: "bg-sky-500",
   Unrated: "bg-muted-foreground",
+}
+
+const tierStars = {
+  Master: 5,
+  Expert: 4,
+  Professional: 3,
+  Associate: 2,
+  Entry: 1,
+  Unrated: 0,
+}
+
+const bandDot = {
+  offensive: "bg-red-500",
+  defensive: "bg-blue-500",
+  platform: "bg-purple-500",
+  specialist: "bg-amber-500",
+}
+
+const bandLabel = {
+  offensive: "Offensive",
+  defensive: "Defensive",
+  platform: "Platform & Build",
+  specialist: "Specialist",
+}
+
+function StarRating({ tier, className = "h-3.5 w-3.5" }) {
+  const filled = tierStars[tier] ?? 0
+  return (
+    <span className="inline-flex items-center gap-0.5" aria-label={`${filled} of 5 difficulty stars`}>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star
+          key={i}
+          className={`${className} ${i < filled ? "fill-amber-400 text-amber-400" : "fill-none text-muted-foreground/30"}`}
+        />
+      ))}
+    </span>
+  )
 }
 
 function formatCost(cost) {
@@ -245,6 +285,15 @@ export function CertsPageContent() {
               </span>
             ))}
         </div>
+
+        <div className="mt-2 flex flex-wrap gap-3 border-t border-border/40 pt-3">
+          {Object.entries(bandLabel).map(([band, label]) => (
+            <span key={band} className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+              <span className={`h-2.5 w-2.5 rounded-full ${bandDot[band]}`} />
+              {label}
+            </span>
+          ))}
+        </div>
       </section>
 
       {filtered.length === 0 ? (
@@ -262,9 +311,18 @@ export function CertsPageContent() {
             }}
           >
             {activeTierDomains.map((domain) => (
-              <div key={domain} className="rounded-2xl border border-border/50 bg-card/30 p-3">
-                <p className="mb-3 truncate text-center text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <div
+                key={domain}
+                className={`rounded-2xl border-t-2 border-border/50 bg-card/30 p-3 ${
+                  domainBand[domain] ? bandDot[domainBand[domain]].replace("bg-", "border-t-") : ""
+                }`}
+              >
+                <p className="mb-1 flex items-center justify-center gap-1.5 truncate text-center text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  <span className={`h-2 w-2 shrink-0 rounded-full ${bandDot[domainBand[domain]] ?? "bg-muted-foreground"}`} />
                   {domainLabels[domain]}
+                </p>
+                <p className="mb-3 text-center text-[10px] text-muted-foreground/70">
+                  {bandLabel[domainBand[domain]]}
                 </p>
                 <div className="space-y-4">
                   {tierOrder
@@ -327,10 +385,16 @@ export function CertsPageContent() {
           {activeCert ? (
             <>
               <DialogHeader>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <Badge className={`${tierColor[tierForLevel(activeCert.level)]} border`}>
-                    {tierForLevel(activeCert.level)} · {activeCert.level ?? "—"}
+                    <span
+                      className={`mr-1.5 inline-block h-2 w-2 rounded-full ${
+                        bandDot[domainBand[activeCert.domain]] ?? "bg-muted-foreground"
+                      }`}
+                    />
+                    {tierForLevel(activeCert.level)}
                   </Badge>
+                  <StarRating tier={tierForLevel(activeCert.level)} />
                   {activeCert.status !== "active" ? (
                     <Badge variant="outline" className="capitalize">
                       {activeCert.status}
@@ -405,6 +469,28 @@ export function CertsPageContent() {
                       {ehuLearningPaths[activeCert.domain].label}
                       <ExternalLink className="h-3 w-3" />
                     </a>
+                  </div>
+                ) : null}
+                {freeLearningResources[activeCert.domain]?.length ? (
+                  <div className="rounded-xl border border-border/50 bg-background/60 p-3 sm:col-span-2">
+                    <p className="flex items-center gap-1.5 text-xs uppercase tracking-wide text-muted-foreground">
+                      <GraduationCap className="h-3.5 w-3.5" />
+                      Free training that covers this
+                    </p>
+                    <div className="mt-1.5 flex flex-wrap gap-2">
+                      {freeLearningResources[activeCert.domain].map((res) => (
+                        <a
+                          key={res.name}
+                          href={res.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-1 rounded-full border border-border/60 bg-card/50 px-3 py-1 text-xs font-medium transition-colors hover:border-primary/50 hover:text-primary"
+                        >
+                          {res.name}
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 ) : null}
               </div>
