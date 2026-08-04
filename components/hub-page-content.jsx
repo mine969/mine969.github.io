@@ -141,17 +141,30 @@ export function HubPageContent() {
               key={item.title}
               className="group flex flex-col justify-between rounded-2xl border border-primary/30 bg-primary/5 p-6 transition-colors hover:border-primary/60"
             >
-              <a href={item.url} target="_blank" rel="noreferrer">
-                <div className="flex items-center justify-between gap-2">
-                  <Badge variant="secondary" className="gap-1 bg-primary/15 text-primary">
-                    <Star className="h-3 w-3" />
-                    {item.tag}
-                  </Badge>
-                  <ExternalLink className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" />
-                </div>
-                <h3 className="mt-3 text-lg font-semibold group-hover:text-primary">{item.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{item.description}</p>
-              </a>
+              {item.internal ? (
+                <Link href={item.url}>
+                  <div className="flex items-center justify-between gap-2">
+                    <Badge variant="secondary" className="gap-1 bg-primary/15 text-primary">
+                      <Star className="h-3 w-3" />
+                      {item.tag}
+                    </Badge>
+                  </div>
+                  <h3 className="mt-3 text-lg font-semibold group-hover:text-primary">{item.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{item.description}</p>
+                </Link>
+              ) : (
+                <a href={item.url} target="_blank" rel="noreferrer">
+                  <div className="flex items-center justify-between gap-2">
+                    <Badge variant="secondary" className="gap-1 bg-primary/15 text-primary">
+                      <Star className="h-3 w-3" />
+                      {item.tag}
+                    </Badge>
+                    <ExternalLink className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" />
+                  </div>
+                  <h3 className="mt-3 text-lg font-semibold group-hover:text-primary">{item.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{item.description}</p>
+                </a>
+              )}
               {item.creditName ? (
                 <p className="mt-4 text-xs text-muted-foreground">
                   Source:{" "}

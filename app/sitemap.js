@@ -22,5 +22,11 @@ export default function sitemap() {
       changeFrequency: "weekly",
       priority: 0.7,
     },
+    {
+      url: `${siteUrl}/certs`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
   ]
 }

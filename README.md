@@ -7,6 +7,9 @@ Live site: `https://mine969.github.io/`
 Routes:
 
 - Main portfolio: `/`
+- Resume snapshot: `/resume`
+- Collection Hub (cybersecurity/IT link collection): `/hub`
+- Certification Roadmap (cybersecurity certs by domain/tier): `/certs`
 - Classic backup version: `/classic`
 - Beta review route: `/new-ver`
 
@@ -27,6 +30,8 @@ Routes:
 - Leadership & Community section with event proof photos
 - SEO metadata, `robots.txt`, and `sitemap.xml`
 - Static export for reliable GitHub Pages hosting
+- Collection Hub (`/hub`): searchable, categorized library of cybersecurity/IT/DFIR/OSINT tools, cheatsheets, sandboxes, and reading lists — each externally-sourced section credits and links back to its original author
+- Certification Roadmap (`/certs`): 144 hands-on cybersecurity certifications across 13 technical domains and 5 difficulty tiers, filterable by domain/issuing body, with cost, exam format, and renewal info — data sourced and credited to PHK Knowledge Sharing's open cert-roadmap dataset
 
 ## Local Development
 
@@ -56,6 +61,8 @@ app/
   new-ver/               Review route for promoted minimal version
   notes/                 Notes page
   resume/                Resume page
+  hub/                   Collection Hub route (link + resource collection)
+  certs/                 Certification Roadmap route
   layout.jsx             Site layout and metadata
   page.jsx               Current main homepage entry
   robots.js              Static robots.txt route
@@ -69,11 +76,16 @@ components/
   navbar.jsx             Top navigation
   locale-provider.jsx    Locale state and persistence
   locale-switcher.jsx    Language selector
+  resume-page-content.jsx  Resume snapshot page content
+  hub-page-content.jsx     Collection Hub page content (search + category grid)
+  certs-page-content.jsx   Certification Roadmap page content (filters + tiers)
 
 lib/
   portfolio-data.js            Base portfolio data and links
   portfolio-copy.js            UI text and translations
   portfolio-localized-data.js  Localized lists and labels
+  hub-data.js                  Collection Hub categories, links, credits
+  certs-data.js                Certification roadmap data, sourced and credited
 
 public/
   community/              Leadership & community event photos
