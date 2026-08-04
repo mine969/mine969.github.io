@@ -5,16 +5,26 @@ import Link from "next/link"
 import {
   ArrowLeft,
   Award,
+  BadgeCheck,
   Clock,
   DollarSign,
   ExternalLink,
+  FileText,
   Filter,
   Github,
   RefreshCw,
   Search,
+  Timer,
 } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 import { profile } from "@/lib/portfolio-data"
 import { certSourceCredit, certifications, domainLabels, domainOrder } from "@/lib/certs-data"
 
@@ -30,12 +40,21 @@ function tierForLevel(level) {
 const tierOrder = ["Master", "Expert", "Professional", "Associate", "Entry", "Unrated"]
 
 const tierColor = {
-  Master: "bg-red-500/15 text-red-600 dark:text-red-400",
-  Expert: "bg-orange-500/15 text-orange-600 dark:text-orange-400",
-  Professional: "bg-amber-500/15 text-amber-600 dark:text-amber-400",
-  Associate: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400",
-  Entry: "bg-sky-500/15 text-sky-600 dark:text-sky-400",
-  Unrated: "bg-muted text-muted-foreground",
+  Master: "bg-red-500/15 text-red-600 dark:text-red-400 border-red-500/30",
+  Expert: "bg-orange-500/15 text-orange-600 dark:text-orange-400 border-orange-500/30",
+  Professional: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30",
+  Associate: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
+  Entry: "bg-sky-500/15 text-sky-600 dark:text-sky-400 border-sky-500/30",
+  Unrated: "bg-muted text-muted-foreground border-border",
+}
+
+const tierDot = {
+  Master: "bg-red-500",
+  Expert: "bg-orange-500",
+  Professional: "bg-amber-500",
+  Associate: "bg-emerald-500",
+  Entry: "bg-sky-500",
+  Unrated: "bg-muted-foreground",
 }
 
 function formatCost(cost) {
@@ -43,10 +62,19 @@ function formatCost(cost) {
   return `$${cost.amount.toLocaleString()}`
 }
 
+function formatExamFormat(format) {
+  if (!format) return "Not published"
+  return format
+    .split("-")
+    .map((w) => w[0].toUpperCase() + w.slice(1))
+    .join(" ")
+}
+
 export function CertsPageContent() {
   const [query, setQuery] = useState("")
   const [domainFilter, setDomainFilter] = useState("all")
   const [vendorFilter, setVendorFilter] = useState("all")
+  const [activeCert, setActiveCert] = useState(null)
 
   const vendors = useMemo(
     () => Array.from(new Set(certifications.map((c) => c.vendor))).sort(),
@@ -67,21 +95,32 @@ export function CertsPageContent() {
     })
   }, [query, domainFilter, vendorFilter])
 
-  const grouped = useMemo(() => {
-    const byTier = {}
+  const visibleDomains = domainFilter === "all" ? domainOrder : [domainFilter]
+
+  // roadmap[domain][tier] = certs, sorted by level desc
+  const roadmap = useMemo(() => {
+    const map = {}
+    for (const domain of visibleDomains) map[domain] = {}
     for (const c of filtered) {
+      if (!map[c.domain]) continue
       const tier = tierForLevel(c.level)
-      if (!byTier[tier]) byTier[tier] = []
-      byTier[tier].push(c)
+      if (!map[c.domain][tier]) map[c.domain][tier] = []
+      map[c.domain][tier].push(c)
     }
-    for (const tier of Object.keys(byTier)) {
-      byTier[tier].sort((a, b) => (b.level ?? 0) - (a.level ?? 0))
+    for (const domain of Object.keys(map)) {
+      for (const tier of Object.keys(map[domain])) {
+        map[domain][tier].sort((a, b) => (b.level ?? 0) - (a.level ?? 0))
+      }
     }
-    return byTier
-  }, [filtered])
+    return map
+  }, [filtered, visibleDomains])
+
+  const activeTierDomains = visibleDomains.filter((d) =>
+    Object.values(roadmap[d] ?? {}).some((arr) => arr.length)
+  )
 
   return (
-    <main className="container mx-auto max-w-7xl px-4 py-12">
+    <main className="container mx-auto max-w-[1600px] px-4 py-12">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <Link
           href="/hub"
@@ -107,8 +146,8 @@ export function CertsPageContent() {
         </h1>
         <p className="mt-4 max-w-3xl text-muted-foreground">
           Hands-on, technical-only cybersecurity certifications — positioned by the depth they
-          actually demand, not by marketing tier. No CISSP, CISM, audit, or paperwork-heavy
-          credentials here. Filter by domain or issuing body, or search a specific cert below.
+          actually demand, not by marketing tier. Domains run left to right, difficulty tier runs
+          top to bottom. Click any certification for its full exam details.
         </p>
 
         <div className="mt-6 rounded-2xl border border-primary/30 bg-primary/5 p-5">
@@ -187,6 +226,17 @@ export function CertsPageContent() {
             ))}
           </select>
         </div>
+
+        <div className="mt-5 flex flex-wrap gap-3">
+          {tierOrder
+            .filter((t) => t !== "Unrated")
+            .map((tier) => (
+              <span key={tier} className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                <span className={`h-2.5 w-2.5 rounded-full ${tierDot[tier]}`} />
+                {tier}
+              </span>
+            ))}
+        </div>
       </section>
 
       {filtered.length === 0 ? (
@@ -195,69 +245,48 @@ export function CertsPageContent() {
           No certifications match those filters.
         </p>
       ) : (
-        <div className="mt-8 space-y-10">
-          {tierOrder
-            .filter((tier) => grouped[tier]?.length)
-            .map((tier) => (
-              <section key={tier}>
-                <div className="mb-4 flex items-center gap-3">
-                  <Badge className={`${tierColor[tier]} border-0 px-3 py-1 text-sm font-semibold`}>
-                    {tier}
-                  </Badge>
-                  <span className="text-xs text-muted-foreground">
-                    {grouped[tier].length} certification{grouped[tier].length === 1 ? "" : "s"}
-                  </span>
-                </div>
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {grouped[tier].map((cert) => (
-                    <a
-                      key={cert.id}
-                      href={cert.vendorUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="group flex flex-col justify-between rounded-2xl border border-border/50 bg-card/40 p-5 backdrop-blur-sm transition-colors hover:border-primary/40"
-                    >
-                      <div>
-                        <div className="flex items-start justify-between gap-2">
-                          <div>
-                            <h3 className="font-semibold group-hover:text-primary">
-                              {cert.name}
-                            </h3>
-                            <p className="text-xs text-muted-foreground">{cert.vendor}</p>
-                          </div>
-                          <ExternalLink className="h-3.5 w-3.5 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
+        <div className="mt-8 overflow-x-auto pb-4">
+          <div
+            className="grid gap-3"
+            style={{
+              gridTemplateColumns: `repeat(${activeTierDomains.length}, minmax(210px, 1fr))`,
+              minWidth: activeTierDomains.length * 220,
+            }}
+          >
+            {activeTierDomains.map((domain) => (
+              <div key={domain} className="rounded-2xl border border-border/50 bg-card/30 p-3">
+                <p className="mb-3 truncate text-center text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  {domainLabels[domain]}
+                </p>
+                <div className="space-y-4">
+                  {tierOrder
+                    .filter((tier) => roadmap[domain]?.[tier]?.length)
+                    .map((tier) => (
+                      <div key={tier}>
+                        <div className="mb-1.5 flex items-center gap-1.5">
+                          <span className={`h-1.5 w-1.5 rounded-full ${tierDot[tier]}`} />
+                          <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+                            {tier}
+                          </span>
                         </div>
-                        <p className="mt-2 text-xs leading-snug text-muted-foreground">
-                          {cert.fullName}
-                        </p>
-                        {cert.status !== "active" ? (
-                          <Badge variant="outline" className="mt-2 text-[10px] capitalize">
-                            {cert.status}
-                          </Badge>
-                        ) : null}
+                        <div className="space-y-1.5">
+                          {roadmap[domain][tier].map((cert) => (
+                            <button
+                              key={cert.id}
+                              type="button"
+                              onClick={() => setActiveCert(cert)}
+                              className={`w-full rounded-lg border px-2.5 py-1.5 text-left text-xs font-medium transition-colors hover:border-primary/60 hover:bg-primary/10 ${tierColor[tier]}`}
+                            >
+                              {cert.name}
+                            </button>
+                          ))}
+                        </div>
                       </div>
-                      <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
-                        <span className="inline-flex items-center gap-1">
-                          <DollarSign className="h-3 w-3" />
-                          {formatCost(cert.cost)}
-                        </span>
-                        {cert.renewalYears ? (
-                          <span className="inline-flex items-center gap-1">
-                            <RefreshCw className="h-3 w-3" />
-                            {cert.renewalYears}yr renewal
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center gap-1">
-                            <Clock className="h-3 w-3" />
-                            No expiry
-                          </span>
-                        )}
-                      </div>
-                    </a>
-                  ))}
+                    ))}
                 </div>
-              </section>
+              </div>
             ))}
+          </div>
         </div>
       )}
 
@@ -284,6 +313,113 @@ export function CertsPageContent() {
           </a>
         </p>
       </section>
+
+      <Dialog open={!!activeCert} onOpenChange={(open) => !open && setActiveCert(null)}>
+        <DialogContent className="max-w-lg">
+          {activeCert ? (
+            <>
+              <DialogHeader>
+                <div className="flex items-center gap-2">
+                  <Badge className={`${tierColor[tierForLevel(activeCert.level)]} border`}>
+                    {tierForLevel(activeCert.level)} · {activeCert.level ?? "—"}
+                  </Badge>
+                  {activeCert.status !== "active" ? (
+                    <Badge variant="outline" className="capitalize">
+                      {activeCert.status}
+                    </Badge>
+                  ) : null}
+                </div>
+                <DialogTitle className="text-2xl">{activeCert.name}</DialogTitle>
+                <DialogDescription>{activeCert.fullName}</DialogDescription>
+              </DialogHeader>
+
+              <div className="grid gap-3 text-sm sm:grid-cols-2">
+                <div className="rounded-xl border border-border/50 bg-background/60 p-3">
+                  <p className="flex items-center gap-1.5 text-xs uppercase tracking-wide text-muted-foreground">
+                    <BadgeCheck className="h-3.5 w-3.5" />
+                    Issuing body
+                  </p>
+                  <p className="mt-1 font-medium">{activeCert.vendor}</p>
+                </div>
+                <div className="rounded-xl border border-border/50 bg-background/60 p-3">
+                  <p className="flex items-center gap-1.5 text-xs uppercase tracking-wide text-muted-foreground">
+                    <FileText className="h-3.5 w-3.5" />
+                    Domain
+                  </p>
+                  <p className="mt-1 font-medium">{domainLabels[activeCert.domain]}</p>
+                </div>
+                <div className="rounded-xl border border-border/50 bg-background/60 p-3">
+                  <p className="flex items-center gap-1.5 text-xs uppercase tracking-wide text-muted-foreground">
+                    <DollarSign className="h-3.5 w-3.5" />
+                    Cost
+                  </p>
+                  <p className="mt-1 font-medium">{formatCost(activeCert.cost)}</p>
+                  {activeCert.cost?.note ? (
+                    <p className="mt-1 text-xs text-muted-foreground">{activeCert.cost.note}</p>
+                  ) : null}
+                </div>
+                <div className="rounded-xl border border-border/50 bg-background/60 p-3">
+                  <p className="flex items-center gap-1.5 text-xs uppercase tracking-wide text-muted-foreground">
+                    <Timer className="h-3.5 w-3.5" />
+                    Exam format
+                  </p>
+                  <p className="mt-1 font-medium">{formatExamFormat(activeCert.examFormat)}</p>
+                  {activeCert.examHours ? (
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {activeCert.examHours} hour{activeCert.examHours === 1 ? "" : "s"}
+                    </p>
+                  ) : null}
+                </div>
+                <div className="rounded-xl border border-border/50 bg-background/60 p-3 sm:col-span-2">
+                  <p className="flex items-center gap-1.5 text-xs uppercase tracking-wide text-muted-foreground">
+                    <RefreshCw className="h-3.5 w-3.5" />
+                    Renewal
+                  </p>
+                  <p className="mt-1 font-medium">
+                    {activeCert.renewalYears
+                      ? `Every ${activeCert.renewalYears} year${activeCert.renewalYears === 1 ? "" : "s"}`
+                      : "Does not expire"}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2 pt-2 sm:flex-row">
+                <a
+                  href={activeCert.vendorUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  Visit official certification page
+                </a>
+                {activeCert.source && activeCert.source !== activeCert.vendorUrl ? (
+                  <a
+                    href={activeCert.source}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-border/60 px-4 py-2.5 text-sm font-medium transition-colors hover:border-primary/50 hover:text-primary"
+                  >
+                    Source
+                  </a>
+                ) : null}
+              </div>
+
+              <p className="text-center text-[11px] text-muted-foreground">
+                Data via{" "}
+                <a
+                  href={certSourceCredit.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-primary"
+                >
+                  {certSourceCredit.name}
+                </a>
+              </p>
+            </>
+          ) : null}
+        </DialogContent>
+      </Dialog>
     </main>
   )
 }
