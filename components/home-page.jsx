@@ -12,6 +12,7 @@ import { localizedCollections } from "@/lib/portfolio-localized-data"
 import {
   certifications,
   getCvLink,
+  isSelfHostedCv,
   profile,
   projects,
   services,
@@ -254,6 +255,7 @@ export function HomePage() {
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
                   <a
                     href={getCvLink(locale)}
+                    download={isSelfHostedCv(getCvLink(locale)) ? "" : undefined}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex w-full items-center justify-center rounded-full bg-primary px-8 py-4 text-base font-semibold text-primary-foreground transition-colors hover:bg-primary/90 sm:w-auto"

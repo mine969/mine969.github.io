@@ -13,6 +13,7 @@ import { localizedCollections } from "@/lib/portfolio-localized-data"
 import {
   certifications,
   getCvLink,
+  isSelfHostedCv,
   profile,
   projects,
   siteUrl,
@@ -199,6 +200,7 @@ export function BetaHomePage({ isBeta = false }) {
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a
                 href={getCvLink(locale)}
+                download={isSelfHostedCv(getCvLink(locale)) ? "" : undefined}
                 target="_blank"
                 rel="noreferrer"
                 className="beta-primary-button inline-flex min-h-12 items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -509,6 +511,7 @@ export function BetaHomePage({ isBeta = false }) {
                   </a>
                   <a
                     href={getCvLink(locale)}
+                    download={isSelfHostedCv(getCvLink(locale)) ? "" : undefined}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex min-h-12 items-center justify-between rounded-2xl border border-border/50 bg-background/75 px-4 py-3 text-sm font-semibold transition-colors hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
