@@ -83,7 +83,7 @@ export function HubPageContent() {
   const resultCount = filteredCategories.reduce((sum, c) => sum + c.links.length, 0)
 
   return (
-    <main className="container mx-auto max-w-7xl px-4 py-12">
+    <main id="main-content" tabIndex={-1} className="container mx-auto max-w-7xl px-4 py-12">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <Link
           href="/"

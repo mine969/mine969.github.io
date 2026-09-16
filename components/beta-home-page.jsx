@@ -127,7 +127,7 @@ export function BetaHomePage({ isBeta = false }) {
             <p className="text-sm font-semibold tracking-[0.16em] text-muted-foreground">
               {isBeta ? "BETA" : "PORTFOLIO"}
             </p>
-            <h1 className="text-sm font-medium">{profile.name}</h1>
+            <p className="text-sm font-medium">{profile.name}</p>
           </div>
 
           <nav aria-label="Primary sections" className="hidden items-center gap-5 text-sm text-muted-foreground lg:flex">
@@ -164,7 +164,7 @@ export function BetaHomePage({ isBeta = false }) {
         </nav>
       </header>
 
-      <main className="mx-auto max-w-6xl px-4 py-6 sm:py-10">
+      <main id="main-content" tabIndex={-1} className="mx-auto max-w-6xl px-4 py-6 sm:py-10">
         <section aria-labelledby="beta-hero-title" className="beta-panel beta-glow grid gap-6 p-5 sm:gap-8 sm:p-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
           <div className="relative z-10 order-2 space-y-5 lg:order-1">
             <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-3 py-1 text-sm font-medium text-emerald-600 dark:text-emerald-400">
@@ -174,9 +174,9 @@ export function BetaHomePage({ isBeta = false }) {
 
             <div className="space-y-3">
               <p className="beta-accent-label text-sm uppercase tracking-[0.22em]">{profile.title}</p>
-              <h2 id="beta-hero-title" className="max-w-3xl text-3xl font-semibold tracking-tight sm:text-5xl">
+              <h1 id="beta-hero-title" className="max-w-3xl text-3xl font-semibold tracking-tight sm:text-5xl">
                 {copy.hero.heroTitle}
-              </h2>
+              </h1>
               <p className="max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
                 {copy.hero.heroSubtitle}
               </p>

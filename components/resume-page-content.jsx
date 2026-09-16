@@ -19,7 +19,7 @@ export function ResumePageContent() {
   const experience = localizedTimeline.filter((item) => !education.includes(item))
 
   return (
-    <main className="container mx-auto max-w-5xl px-4 py-12">
+    <main id="main-content" tabIndex={-1} className="container mx-auto max-w-5xl px-4 py-12">
       <div className="flex items-center justify-between gap-4">
         <Link href="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary">
           <ArrowLeft className="h-4 w-4" />

@@ -168,7 +168,7 @@ export function CertsPageContent() {
   )
 
   return (
-    <main className="container mx-auto max-w-[1600px] px-4 py-12">
+    <main id="main-content" tabIndex={-1} className="container mx-auto max-w-[1600px] px-4 py-12">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <Link
           href="/hub"
@@ -241,7 +241,11 @@ export function CertsPageContent() {
         <div className="mt-6 grid gap-3 sm:grid-cols-3">
           <div className="relative">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <label htmlFor="cert-search" className="sr-only">
+              Search certifications
+            </label>
             <Input
+              id="cert-search"
               type="search"
               placeholder="Search certifications..."
               value={query}
@@ -249,7 +253,11 @@ export function CertsPageContent() {
               className="h-11 rounded-full border-border/50 bg-background/70 pl-9"
             />
           </div>
+          <label htmlFor="cert-domain" className="sr-only">
+            Filter by domain
+          </label>
           <select
+            id="cert-domain"
             value={domainFilter}
             onChange={(event) => setDomainFilter(event.target.value)}
             className="h-11 rounded-full border border-border/50 bg-background/70 px-4 text-sm text-foreground"
@@ -261,7 +269,11 @@ export function CertsPageContent() {
               </option>
             ))}
           </select>
+          <label htmlFor="cert-vendor" className="sr-only">
+            Filter by issuing body
+          </label>
           <select
+            id="cert-vendor"
             value={vendorFilter}
             onChange={(event) => setVendorFilter(event.target.value)}
             className="h-11 rounded-full border border-border/50 bg-background/70 px-4 text-sm text-foreground"
