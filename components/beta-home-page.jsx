@@ -244,8 +244,8 @@ export function BetaHomePage({ isBeta = false }) {
           <div className="beta-panel p-5 sm:p-8">
             <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">{copy.nav.about}</p>
             <h2 id="beta-about-title" className="mt-3 text-3xl font-semibold tracking-tight">{copy.about.heading}</h2>
-            <p className="mt-5 text-base leading-7 text-muted-foreground">{copy.about.summary}</p>
-            <p className="mt-4 text-base leading-7 text-muted-foreground">{copy.about.body}</p>
+            <p className="mt-5 max-w-[68ch] text-base leading-7 text-muted-foreground">{copy.about.summary}</p>
+            <p className="mt-4 max-w-[68ch] text-base leading-7 text-muted-foreground">{copy.about.body}</p>
           </div>
 
           <div className="beta-panel p-5 sm:p-8">
@@ -475,7 +475,7 @@ export function BetaHomePage({ isBeta = false }) {
                     href={profile.links.linktree}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex min-h-12 items-center justify-between rounded-2xl border border-primary/30 bg-primary/5 px-4 py-3 text-sm font-semibold text-primary transition-colors hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:col-span-2"
+                    className="inline-flex min-h-12 items-center justify-between rounded-2xl border border-border/50 bg-background/75 px-4 py-3 text-sm font-semibold transition-colors hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:col-span-2"
                   >
                     <span className="inline-flex items-center gap-3">
                       <Link2 className="h-4 w-4" />
@@ -512,7 +512,7 @@ export function BetaHomePage({ isBeta = false }) {
                     download={isSelfHostedCv(getCvLink(locale)) ? "" : undefined}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex min-h-12 items-center justify-between rounded-2xl border border-border/50 bg-background/75 px-4 py-3 text-sm font-semibold transition-colors hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="inline-flex min-h-12 items-center justify-between rounded-2xl border border-primary/30 bg-primary/5 px-4 py-3 text-sm font-semibold text-primary transition-colors hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <span className="inline-flex items-center gap-3">
                       <FileText className="h-4 w-4" />
@@ -543,7 +543,7 @@ export function BetaHomePage({ isBeta = false }) {
                   </Link>
                   <Link
                     href="/hub"
-                    className="inline-flex min-h-12 items-center justify-between rounded-2xl border border-primary/30 bg-primary/5 px-4 py-3 text-sm font-semibold text-primary transition-colors hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:col-span-2"
+                    className="inline-flex min-h-12 items-center justify-between rounded-2xl border border-border/50 bg-background/75 px-4 py-3 text-sm font-semibold transition-colors hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:col-span-2"
                   >
                     <span className="inline-flex items-center gap-3">
                       <Sparkles className="h-4 w-4" />

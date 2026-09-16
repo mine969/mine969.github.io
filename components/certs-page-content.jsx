@@ -187,7 +187,7 @@ export function CertsPageContent() {
         </div>
       </div>
 
-      <section className="mt-8 rounded-3xl border border-border/50 bg-card/40 p-5 sm:p-8">
+      <section className="mt-8 beta-panel-flat p-5 sm:p-8">
         <p className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-muted-foreground">
           <Award className="h-4 w-4 text-primary" />
           Certification Roadmap
@@ -327,7 +327,7 @@ export function CertsPageContent() {
             {activeTierDomains.map((domain) => (
               <div
                 key={domain}
-                className={`w-[78vw] shrink-0 snap-start rounded-2xl border-t-2 border-border/50 bg-card/30 p-3 xs:w-[240px] sm:w-[220px] md:w-[210px] ${
+                className={`w-[260px] shrink-0 snap-start rounded-2xl border-t-2 border-border/50 bg-card/30 p-3 sm:w-[220px] md:w-[210px] ${
                   activeTierDomains.length === 1 ? "sm:w-full md:w-full" : ""
                 } ${domainBand[domain] ? bandDot[domainBand[domain]].replace("bg-", "border-t-") : ""}`}
               >
@@ -370,7 +370,7 @@ export function CertsPageContent() {
         </div>
       )}
 
-      <section className="mt-12 rounded-3xl border border-border/50 bg-card/40 p-5 text-center sm:p-8">
+      <section className="mt-12 beta-panel-flat p-5 text-center sm:p-8">
         <p className="text-sm text-muted-foreground">
           Data curated for {profile.name}&rsquo;s personal reference. Spotted an error, or want a
           domain expanded? Reach out.

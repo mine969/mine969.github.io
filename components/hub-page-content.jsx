@@ -99,7 +99,7 @@ export function HubPageContent() {
         </div>
       </div>
 
-      <section className="mt-8 rounded-3xl border border-border/50 bg-card/40 p-5 sm:p-8">
+      <section className="mt-8 beta-panel-flat p-5 sm:p-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-muted-foreground">
@@ -222,7 +222,7 @@ export function HubPageContent() {
         </section>
       )}
 
-      <section className="mt-12 rounded-3xl border border-border/50 bg-card/40 p-5 text-center sm:p-8">
+      <section className="mt-12 beta-panel-flat p-5 text-center sm:p-8">
         <p className="text-sm text-muted-foreground">
           Built and maintained by {profile.name}. Found something broken or have a resource I should add?
         </p>

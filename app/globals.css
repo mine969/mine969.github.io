@@ -172,6 +172,11 @@
     outline: none;
   }
 
+  .beta-panel-flat {
+    @apply rounded-[2rem] border bg-card/40;
+    border-color: color-mix(in oklab, var(--color-border) 45%, transparent);
+  }
+
   .no-scrollbar {
     scrollbar-width: none;
     -ms-overflow-style: none;

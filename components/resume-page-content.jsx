@@ -28,7 +28,7 @@ export function ResumePageContent() {
         <LocaleSwitcher />
       </div>
 
-      <section className="mt-8 rounded-3xl border border-border/50 bg-card/40 p-8">
+      <section className="mt-8 beta-panel-flat p-8">
         <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
           <div>
             <h1 className="text-4xl font-bold tracking-tight">{profile.name}</h1>
@@ -58,7 +58,7 @@ export function ResumePageContent() {
 
       <section className="mt-8 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-8">
-          <div className="rounded-3xl border border-border/50 bg-card/40 p-6">
+          <div className="beta-panel-flat p-6">
             <h2 className="text-2xl font-semibold">{copy.resume.experience}</h2>
             <div className="mt-5 space-y-5">
               {experience.map((item) => (
@@ -76,7 +76,7 @@ export function ResumePageContent() {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-border/50 bg-card/40 p-6">
+          <div className="beta-panel-flat p-6">
             <h2 className="text-2xl font-semibold">{copy.resume.education}</h2>
             <div className="mt-5 space-y-5">
               {education.map((item) => (
@@ -96,7 +96,7 @@ export function ResumePageContent() {
         </div>
 
         <div className="space-y-8">
-          <div className="rounded-3xl border border-border/50 bg-card/40 p-6">
+          <div className="beta-panel-flat p-6">
             <h2 className="text-2xl font-semibold">{copy.resume.technical}</h2>
             <ul className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
               {localized.technicalSkills.map((item) => (
@@ -107,7 +107,7 @@ export function ResumePageContent() {
             </ul>
           </div>
 
-          <div className="rounded-3xl border border-border/50 bg-card/40 p-6">
+          <div className="beta-panel-flat p-6">
             <h2 className="text-2xl font-semibold">{copy.resume.languages}</h2>
             <ul className="mt-5 space-y-3 text-sm">
               {localized.languagesList.map((item) => (
@@ -119,7 +119,7 @@ export function ResumePageContent() {
             </ul>
           </div>
 
-          <div className="rounded-3xl border border-border/50 bg-card/40 p-6">
+          <div className="beta-panel-flat p-6">
             <h2 className="text-2xl font-semibold">{copy.resume.style}</h2>
             <div className="mt-5 flex flex-wrap gap-2">
               {localized.softSkills.map((skill) => (
