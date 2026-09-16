@@ -7,6 +7,10 @@ export const metadata = {
   alternates: {
     canonical: "/certs",
   },
+  // Personal planning reference, not a portfolio piece: keep it out of search
+  // so a name search surfaces actual work rather than a list of certifications
+  // he has not earned yet.
+  robots: { index: false, follow: true },
 }
 
 export default function CertsPage() {
