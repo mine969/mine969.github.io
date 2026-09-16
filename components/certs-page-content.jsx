@@ -143,7 +143,10 @@ export function CertsPageContent() {
     })
   }, [query, domainFilter, vendorFilter])
 
-  const visibleDomains = domainFilter === "all" ? domainOrder : [domainFilter]
+  const visibleDomains = useMemo(
+    () => (domainFilter === "all" ? domainOrder : [domainFilter]),
+    [domainFilter]
+  )
 
   // roadmap[domain][tier] = certs, sorted by level desc
   const roadmap = useMemo(() => {

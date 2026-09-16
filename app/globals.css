@@ -172,6 +172,15 @@
     outline: none;
   }
 
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   .beta-accent-label {
     color: color-mix(in oklab, var(--color-chart-4) 35%, var(--color-foreground));
   }
@@ -209,5 +218,31 @@
     pointer-events: none;
     z-index: 0;
     filter: blur(18px);
+  }
+}
+
+@layer base {
+  /* Thai and Burmese stack marks above and below the baseline: 1.5 clips them. */
+  :lang(th) .leading-6,
+  :lang(my) .leading-6 {
+    line-height: 1.85;
+  }
+
+  /* Letter-spacing breaks cluster shaping in Thai and Burmese. */
+  :lang(th) [class*="tracking-["],
+  :lang(my) [class*="tracking-["] {
+    letter-spacing: normal;
+  }
+
+  /* Japanese has no word spaces: give it room and strict breaking. */
+  :lang(ja) p {
+    line-height: 1.9;
+  }
+
+  :lang(ja) h1,
+  :lang(ja) h2,
+  :lang(ja) h3 {
+    line-break: strict;
+    word-break: normal;
   }
 }

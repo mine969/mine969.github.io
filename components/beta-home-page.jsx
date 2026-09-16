@@ -183,19 +183,17 @@ export function BetaHomePage({ isBeta = false }) {
             </div>
 
             <div className="grid gap-3 text-sm sm:grid-cols-3">
-              <div className="beta-card p-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{copy.hero.basedIn}</p>
-                <p className="mt-2 font-medium">{profile.location}</p>
-              </div>
-              <div className="beta-card p-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{copy.hero.timezone}</p>
-                <p className="mt-2 font-medium">{profile.timezone}</p>
-              </div>
-              <div className="beta-card p-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{copy.hero.openFor}</p>
-                <p className="mt-2 font-medium">{copy.hero.availabilityText}</p>
-              </div>
+              {copy.highlights.map((item) => (
+                <div key={item.label} className="beta-card p-4">
+                  <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{item.label}</p>
+                  <p className="mt-2 text-base font-semibold leading-snug">{item.value}</p>
+                </div>
+              ))}
             </div>
+
+            <p className="text-sm text-muted-foreground">
+              {profile.location} · {profile.timezone} · {copy.hero.availabilityText}
+            </p>
 
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a
@@ -245,7 +243,7 @@ export function BetaHomePage({ isBeta = false }) {
         <section id={aboutId} aria-labelledby="beta-about-title" className="grid gap-6 pt-8 sm:pt-10 lg:grid-cols-[1fr_0.9fr]">
           <div className="beta-panel p-5 sm:p-8">
             <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">{copy.nav.about}</p>
-            <h3 id="beta-about-title" className="mt-3 text-3xl font-semibold tracking-tight">{copy.about.heading}</h3>
+            <h2 id="beta-about-title" className="mt-3 text-3xl font-semibold tracking-tight">{copy.about.heading}</h2>
             <p className="mt-5 text-base leading-7 text-muted-foreground">{copy.about.summary}</p>
             <p className="mt-4 text-base leading-7 text-muted-foreground">{copy.about.body}</p>
           </div>
@@ -265,7 +263,7 @@ export function BetaHomePage({ isBeta = false }) {
         <section id={experienceId} aria-labelledby="beta-experience-title" className="pt-8 sm:pt-10">
           <div className="beta-panel p-5 sm:p-8">
             <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">{copy.nav.experience}</p>
-            <h3 id="beta-experience-title" className="mt-3 text-3xl font-semibold tracking-tight">{copy.experienceSection.title}</h3>
+            <h2 id="beta-experience-title" className="mt-3 text-3xl font-semibold tracking-tight">{copy.experienceSection.title}</h2>
             <p className="mt-4 max-w-3xl text-base leading-7 text-muted-foreground">{copy.experienceSection.intro}</p>
 
             <div className="mt-8 grid gap-4 lg:grid-cols-[1.1fr_0.9fr_0.9fr]">
@@ -324,7 +322,7 @@ export function BetaHomePage({ isBeta = false }) {
         <section id={projectsId} aria-labelledby="beta-projects-title" className="pt-8 sm:pt-10">
           <div className="beta-panel p-5 sm:p-8">
             <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">{copy.nav.projects}</p>
-            <h3 id="beta-projects-title" className="mt-3 text-3xl font-semibold tracking-tight">{copy.projectsSection.title}</h3>
+            <h2 id="beta-projects-title" className="mt-3 text-3xl font-semibold tracking-tight">{copy.projectsSection.title}</h2>
             <p className="mt-4 max-w-3xl text-base leading-7 text-muted-foreground">{copy.projectsSection.intro}</p>
 
             <div className="mt-8 grid gap-4 lg:grid-cols-2">
@@ -365,7 +363,7 @@ export function BetaHomePage({ isBeta = false }) {
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div className="max-w-3xl">
                 <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">{copy.proof.title}</p>
-                <h3 id="beta-proof-title" className="mt-3 text-3xl font-semibold tracking-tight">{copy.proof.howHelpTitle}</h3>
+                <h2 id="beta-proof-title" className="mt-3 text-3xl font-semibold tracking-tight">{copy.proof.howHelpTitle}</h2>
                 <p className="mt-4 text-base leading-7 text-muted-foreground">{copy.proof.howHelpIntro}</p>
               </div>
               <a
@@ -382,24 +380,24 @@ export function BetaHomePage({ isBeta = false }) {
             <div className="mt-6 grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
               <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3" role="list" aria-label="Key highlights">
                 <div className="beta-card p-4">
-                  <p className="text-sm font-medium">{copy.highlights[0].label}</p>
-                  <p className="mt-2 text-2xl font-semibold">{copy.highlights[0].value}</p>
+                  <p className="text-sm font-medium">{copy.hero.basedIn}</p>
+                  <p className="mt-2 text-lg font-semibold">{profile.location}</p>
                 </div>
                 <div className="beta-card p-4">
-                  <p className="text-sm font-medium">{copy.highlights[1].label}</p>
-                  <p className="mt-2 text-2xl font-semibold">{copy.highlights[1].value}</p>
+                  <p className="text-sm font-medium">{copy.hero.timezone}</p>
+                  <p className="mt-2 text-lg font-semibold">{profile.timezone}</p>
                 </div>
                 <div className="beta-card p-4">
-                  <p className="text-sm font-medium">{copy.highlights[2].label}</p>
-                  <p className="mt-2 text-2xl font-semibold">{copy.highlights[2].value}</p>
+                  <p className="text-sm font-medium">{copy.hero.openFor}</p>
+                  <p className="mt-2 text-lg font-semibold leading-snug">{copy.hero.availabilityText}</p>
                 </div>
               </div>
 
               <div className="beta-card p-4 sm:p-5">
                 <div className="flex items-center justify-between gap-3">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Certificates</p>
-                    <h4 className="mt-2 text-lg font-semibold">Verified learning and practice</h4>
+                    <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{copy.proof.title}</p>
+                    <h4 className="mt-2 text-lg font-semibold">{copy.proof.documentsTitle}</h4>
                   </div>
                 </div>
 
@@ -429,9 +427,9 @@ export function BetaHomePage({ isBeta = false }) {
           <div className="beta-panel p-5 sm:p-8">
             <div className="mx-auto max-w-3xl text-center">
               <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">{copy.nav.contact}</p>
-              <h3 id="beta-contact-title" className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+              <h2 id="beta-contact-title" className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
                 {copy.contact.title}
-              </h3>
+              </h2>
               <p className="mt-4 text-base leading-7 text-muted-foreground">{copy.contact.intro}</p>
             </div>
 

@@ -1,5 +1,4 @@
 import { GeistSans } from "geist/font/sans"
-import { GeistMono } from "geist/font/mono"
 import { Suspense } from "react"
 import "./globals.css"
 import { LocaleProvider } from "@/components/locale-provider"
@@ -74,7 +73,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+      <body className={`font-sans ${GeistSans.variable}`}>
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
